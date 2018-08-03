@@ -7,7 +7,7 @@ namespace riminder
 {
     class Riminder
     {
-        private static string DEFAULT_HOST = "https://www.riminder.net/sf/public/api/";
+        private static string DEFAULT_URL = "https://www.riminder.net/sf/public/api/";
         private static string DEFAULT_HOST_BASE = "v1.0/";
 
         private static Dictionary<string, string>  DEFAULT_HEADERS = new Dictionary<string, string>{
@@ -16,25 +16,32 @@ namespace riminder
 
         private string _secret_key;
         private string _webhook_key;
-        private string _host;
+        private Uri _url;
         private string _host_base;
         private Dictionary<string,string> _headers;
+        public RestClientW _client {get;}
 
-        public Riminder(string secret_key, string webhook_key, string host = null, string host_base = null)
+        private static string setstringWthDefault(string value, string dft)
+        {
+            if (value == null)
+                return dft;
+            return value;
+        }
+
+        public Riminder(string secret_key, string webhook_key = null, string url = null, string host_base = null)
         {
             _secret_key = secret_key;
             _webhook_key = webhook_key;
-            _host = DEFAULT_HOST;
-            _host_base = DEFAULT_HOST_BASE;
             _headers = DEFAULT_HEADERS;
 
+            var tmp_url = "";
             // To be able to modify host (test purposes for example)
-            if (host != null) 
-                _host = host;
-            if (host_base != null)
-                _host_base = host;
+            tmp_url = setstringWthDefault(url, DEFAULT_URL);
+            _host_base = setstringWthDefault(host_base, DEFAULT_HOST_BASE);
 
+            _url = new Uri(tmp_url + host_base);
             _headers["X-API-KEY"] = _secret_key;
+            _client = new RestClientW(_url, _headers);
         }
     }
 }
