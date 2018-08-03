@@ -4,9 +4,7 @@ using System.Net;
 
 namespace riminder.response
 {
+    // An interface to group all response.
     public interface IResponse
-    {
-        HttpStatusCode statuscode {get;}
-        string message {get;}
-    }
+    { }
 }

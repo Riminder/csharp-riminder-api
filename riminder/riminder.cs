@@ -8,7 +8,7 @@ namespace riminder
     class Riminder
     {
         private static string DEFAULT_URL = "https://www.riminder.net/sf/public/api/";
-        private static string DEFAULT_HOST_BASE = "v1.0/";
+        private static string DEFAULT_HOST_BASE = "v1.0";
 
         private static Dictionary<string, string>  DEFAULT_HEADERS = new Dictionary<string, string>{
             {"X-API-KEY", ""}
@@ -19,7 +19,9 @@ namespace riminder
         private Uri _url;
         private string _host_base;
         private Dictionary<string,string> _headers;
-        public RestClientW _client {get;}
+        private RestClientW _client;
+
+        public riminder.route.Source source {get;}
 
         private static string setstringWthDefault(string value, string dft)
         {
@@ -39,9 +41,11 @@ namespace riminder
             tmp_url = setstringWthDefault(url, DEFAULT_URL);
             _host_base = setstringWthDefault(host_base, DEFAULT_HOST_BASE);
 
-            _url = new Uri(tmp_url + host_base);
+            _url = new Uri(String.Concat(tmp_url + _host_base));
             _headers["X-API-KEY"] = _secret_key;
             _client = new RestClientW(_url, _headers);
+
+            source = new riminder.route.Source(ref _client);
         }
     }
 }

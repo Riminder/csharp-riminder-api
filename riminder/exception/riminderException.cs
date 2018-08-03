@@ -1,6 +1,6 @@
 using System;
 
-namespace riminder.exception
+namespace riminder.exp
 {
     [System.Serializable]
     public class RiminderException : System.Exception

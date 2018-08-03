@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
 
-namespace riminder.exception
+namespace riminder.exp
 {
     [System.Serializable]
     public class RiminderResponseException : System.Exception
@@ -13,6 +13,7 @@ namespace riminder.exception
         string message;
         string apiMessage;
         IRestResponse response;
+        Uri url;
 
         private static string extractApiErrorMessage(string rawResp)
         {
@@ -37,7 +38,7 @@ namespace riminder.exception
             // Try to get error message from api if possible.
             var apiMessage = extractApiErrorMessage(resp.Content);
 
-            return String.Format("Invalid response: {0} -> {1} ({2})", code, message, apiMessage);
+            return String.Format("Invalid response: {0}:{1} -> {2} ({3})", (int)code, code, message, apiMessage);
         }
 
         public RiminderResponseException(IRestResponse resp): base(gen_error_message(resp))
@@ -45,6 +46,7 @@ namespace riminder.exception
             response = resp;
             code = resp.StatusCode;
             message = resp.ErrorMessage;
+            url = resp.ResponseUri;
 
             // Try to get error message from api if possible.
             apiMessage = extractApiErrorMessage(resp.Content);

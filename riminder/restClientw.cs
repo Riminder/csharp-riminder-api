@@ -31,19 +31,41 @@ namespace riminder
             }
         }
 
+        private response.BaseResponse<T> deserializeResponse<T>(string response)
+        {
+            response.BaseResponse<T> respObj = null;
+            try
+            {
+                respObj = JsonConvert.DeserializeObject<response.BaseResponse<T>>(response);
+            }
+            catch (JsonException e)
+            {
+                throw new exp.RiminderResponseParsingException("Cannot parse api's response.", e);
+            }
+            return respObj;
+        }
+
+        private static void check_response(IRestResponse resp)
+        {
+            if (!resp.IsSuccessful)
+                throw new riminder.exp.RiminderResponseException(resp);
+        }
+
         public RestClientW(Uri base_uri, Dictionary<string, string> def_headers)
         {
             client = new RestClient(base_uri);
             fill_default_header(def_headers);
         }
 
-        public T get<T>(string endpoint, RequestQueryArgs args = null)
+        public response.BaseResponse<T> get<T>(string endpoint, RequestQueryArgs args = null)
         {
             var req = new RestRequest(endpoint, Method.GET);
             fill_query_params(ref req, args);
+            
             IRestResponse resp = client.Execute(req);
-            T respObj = JsonConvert.DeserializeObject<T>(resp.Content);
-            return respObj;
+            check_response(resp);
+
+            return deserializeResponse<T>(resp.Content);
         }
     }
 }
