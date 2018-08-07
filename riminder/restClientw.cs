@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using RestSharp;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using Newtonsoft.Json;
 namespace riminder
 {
     using RequestQueryArgs = Dictionary<string, string>;
+    using RequestBodyParams = Dictionary<string, object>;
 
     class RestClientW
     {
@@ -29,6 +31,36 @@ namespace riminder
             {
                 req.AddQueryParameter(arg.Key, arg.Value);
             }
+        }
+
+        private void add_file_to_req(ref RestRequest req, string file_path)
+        {
+            if (RequestUtils.is_empty(file_path))
+                return;
+            try
+            {
+                var tmpfile = File.OpenRead(file_path);
+                tmpfile.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new exp.RiminderFileUploadException(file_path, ex.Message);
+            }
+            
+            var filename = Path.GetFileName(file_path);
+            req.AddFile(filename, file_path);
+        }
+
+        private void fill_body_params(ref RestRequest req, RequestBodyParams bodyp, bool isJson = true)
+        {
+            if (bodyp == null)
+                return;
+            if (!isJson)
+            {
+                req.AddBody(bodyp);
+                return;
+            }
+            req.AddJsonBody(bodyp); 
         }
 
         private response.BaseResponse<T> deserializeResponse<T>(string response)
@@ -68,10 +100,22 @@ namespace riminder
             return deserializeResponse<T>(resp.Content);
         }
 
-        public response.BaseResponse<T> post<T>(string endpoint, RequestQueryArgs args = null)
+        public response.BaseResponse<T> post<T>(string endpoint, RequestBodyParams args = null, string file_path = null, bool isbodyjson = true)
         {
-            var req = new RestRequest(endpoint, Method.GET);
-            fill_query_params(ref req, args);
+            var req = new RestRequest(endpoint, Method.POST);
+            fill_body_params(ref req, args, isbodyjson);
+            add_file_to_req(ref req, file_path);
+
+            IRestResponse resp = client.Execute(req);
+            check_response(resp);
+
+            return deserializeResponse<T>(resp.Content);
+        }
+
+        public response.BaseResponse<T> patch<T>(string endpoint, RequestBodyParams args = null, bool isbodyjson = true)
+        {
+            var req = new RestRequest(endpoint, Method.PATCH);
+            fill_body_params(ref req, args, isbodyjson);
 
             IRestResponse resp = client.Execute(req);
             check_response(resp);

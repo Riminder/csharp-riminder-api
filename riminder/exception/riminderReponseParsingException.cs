@@ -3,7 +3,7 @@ using System;
 namespace riminder.exp
 {
     [System.Serializable]
-    public class RiminderResponseParsingException : System.Exception
+    public class RiminderResponseParsingException : RiminderException
     {
         public RiminderResponseParsingException() { }
         public RiminderResponseParsingException(string message) : base(message) { }

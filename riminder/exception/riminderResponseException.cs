@@ -7,13 +7,13 @@ using Newtonsoft.Json;
 namespace riminder.exp
 {
     [System.Serializable]
-    public class RiminderResponseException : System.Exception
+    public class RiminderResponseException : RiminderException
     {
-        HttpStatusCode code;
-        string message;
-        string apiMessage;
-        IRestResponse response;
-        Uri url;
+        public HttpStatusCode code {get;}
+        public string message {get;}
+        public string apiMessage {get;}
+        public IRestResponse response {get;}
+        public Uri url {get;}
 
         private static string extractApiErrorMessage(string rawResp)
         {

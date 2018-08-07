@@ -17,13 +17,13 @@ namespace riminder.route
             return resp.data;
         }
 
-        public response.Source get(string source_id)
+        public response.Source_get get(string source_id)
         {
             var query = new Dictionary<string, string> {
                 {"source_id", source_id}
             };
 
-            var resp = _client.get<response.Source>("source", args: query);
+            var resp = _client.get<response.Source_get>("source", args: query);
             return resp.data;
         } 
     }
