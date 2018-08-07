@@ -67,5 +67,16 @@ namespace riminder
 
             return deserializeResponse<T>(resp.Content);
         }
+
+        public response.BaseResponse<T> post<T>(string endpoint, RequestQueryArgs args = null)
+        {
+            var req = new RestRequest(endpoint, Method.GET);
+            fill_query_params(ref req, args);
+
+            IRestResponse resp = client.Execute(req);
+            check_response(resp);
+
+            return deserializeResponse<T>(resp.Content);
+        }
     }
 }
