@@ -17,7 +17,7 @@ namespace riminder.route
 
         public response.Profile_post add(string source_id, string file_path, string profile_reference, long timestamp_reception, response.TrainingMetadatas training_metadatas)
         {
-            training_metadatas.is_valid(true);
+            training_metadatas.is_valid(isExp:true);
             var body = new Dictionary<string, object>
             {
                 {"source_id", source_id}
@@ -153,6 +153,105 @@ namespace riminder.route
                 var resp = _client.get<response.ProfileScoringList>("profile/scoring", args: query);
                 return resp.data;
             }
+        }
+
+        class Stage
+        {
+            private RestClientW _client;
+            public Stage(ref RestClientW client)
+            {
+                _client = client;
+            }
+
+            public response.ProfileStage set(string source_id, string stage,
+                string profile_id = null, string profile_reference = null, 
+                string filter_id = null, string filter_reference = null)
+            {
+                // To avoid a line of about 30000 column.
+                var mess = String.Format("One beetween profile_id and profile_reference has to be not null or empty. (profile_id: {0} profile_reference: {1})", profile_id, profile_reference);
+                RequestUtils.assert_id_ref_notNull(profile_id, profile_reference, mess);
+                mess = String.Format("One beetween filter_id and filter_reference has to be not null or empty. (filter_id: {0} filter_reference: {1})", filter_id, filter_reference);
+                RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
+
+                var bodyParams = new Dictionary<string, object>
+                {
+                    {"source_id", source_id},
+                    {"stage", stage}
+                };
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_id", profile_id);
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_reference", profile_reference);
+                RequestUtils.addIfNotNull(ref bodyParams, "filter_id", filter_id);
+                RequestUtils.addIfNotNull(ref bodyParams, "filter_reference", filter_reference);
+
+                var resp = _client.patch<response.ProfileStage>("profile/stage", args: bodyParams);
+                return resp.data;
+            }
+        }
+
+        class Rating
+        {
+            private RestClientW _client;
+            public Rating(ref RestClientW client)
+            {
+                _client = client;
+            }
+
+            public response.ProfileRating set(string source_id, string rating,
+                string profile_id = null, string profile_reference = null,
+                string filter_id = null, string filter_reference = null)
+            {
+                // To avoid a line of about 30000 column.
+                var mess = String.Format("One beetween profile_id and profile_reference has to be not null or empty. (profile_id: {0} profile_reference: {1})", profile_id, profile_reference);
+                RequestUtils.assert_id_ref_notNull(profile_id, profile_reference, mess);
+                mess = String.Format("One beetween filter_id and filter_reference has to be not null or empty. (filter_id: {0} filter_reference: {1})", filter_id, filter_reference);
+                RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
+
+                var bodyParams = new Dictionary<string, object>
+                {
+                    {"source_id", source_id},
+                    {"rating", rating}
+                };
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_id", profile_id);
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_reference", profile_reference);
+                RequestUtils.addIfNotNull(ref bodyParams, "filter_id", filter_id);
+                RequestUtils.addIfNotNull(ref bodyParams, "filter_reference", filter_reference);
+
+                var resp = _client.patch<response.ProfileRating>("profile/rating", args: bodyParams);
+                return resp.data;
+            }
+        }
+
+        class Structured
+        {
+            private RestClientW _client;
+            public Structured(ref RestClientW client)
+            {
+                _client = client;
+            }
+
+            public response.ProfileRating check(string source_id, string rating,
+                string profile_id = null, string profile_reference = null,
+                string filter_id = null, string filter_reference = null)
+            {
+                // To avoid a line of about 30000 column.
+                var mess = String.Format("One beetween profile_id and profile_reference has to be not null or empty. (profile_id: {0} profile_reference: {1})", profile_id, profile_reference);
+                RequestUtils.assert_id_ref_notNull(profile_id, profile_reference, mess);
+                mess = String.Format("One beetween filter_id and filter_reference has to be not null or empty. (filter_id: {0} filter_reference: {1})", filter_id, filter_reference);
+                RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
+
+                var bodyParams = new Dictionary<string, object>
+                {
+                    {"source_id", source_id},
+                    {"rating", rating}
+                };
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_id", profile_id);
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_reference", profile_reference);
+                RequestUtils.addIfNotNull(ref bodyParams, "filter_id", filter_id);
+                RequestUtils.addIfNotNull(ref bodyParams, "filter_reference", filter_reference);
+
+                var resp = _client.patch<response.ProfileRating>("profile/rating", args: bodyParams);
+                return resp.data;
+            } 
         }
     }
 }

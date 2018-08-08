@@ -12,6 +12,7 @@ namespace riminder.response
         public List<Experience> experiences;
         public List<Education> educations;
 
+        // Diferent from profile json one.
         public class Experience
         {  
             public string title;
@@ -22,6 +23,7 @@ namespace riminder.response
             public string end_date; 
         }
 
+        // Diferent from profile json one.
         public class Education
         {
             public string title;
