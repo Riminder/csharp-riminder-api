@@ -24,7 +24,6 @@ namespace riminder.response
         public string name;
         public string type;
         public Boolean archive;
-        public int count_source;
         public Date date_creation;
     }
 

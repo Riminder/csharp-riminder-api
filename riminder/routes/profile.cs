@@ -10,9 +10,23 @@ namespace riminder.route
         private RestClientW _client;
         private const string _start_timestamp = "1407423743";
 
+        public Structured json;
+        public Documents documents;
+        public Parsing parsing;
+        public Scoring scoring;
+        public Stage stage;
+        public Rating rating;
+
         public Profile(ref RestClientW client)
         {
             _client = client;
+
+            json = new Structured(ref _client);
+            documents = new Documents(ref _client);
+            parsing = new Parsing(ref _client);
+            scoring = new Scoring(ref _client);
+            stage = new Stage(ref _client);
+            rating = new Rating(ref _client);
         }
 
         public response.Profile_post add(string source_id, string file_path, string profile_reference, long timestamp_reception, response.TrainingMetadatas training_metadatas)
@@ -77,7 +91,7 @@ namespace riminder.route
             return resp.data;
         }
 
-        class Documents
+        public class Documents
         {
             private RestClientW _client;
             public Documents(ref RestClientW client)
@@ -103,7 +117,7 @@ namespace riminder.route
             }
         }
 
-        class Parsing
+        public class Parsing
         {
             private RestClientW _client;
             public Parsing(ref RestClientW client)
@@ -129,7 +143,7 @@ namespace riminder.route
             }
         }
 
-        class Scoring
+        public class Scoring
         {
             private RestClientW _client;
             public Scoring(ref RestClientW client)
@@ -155,7 +169,7 @@ namespace riminder.route
             }
         }
 
-        class Stage
+        public class Stage
         {
             private RestClientW _client;
             public Stage(ref RestClientW client)
@@ -188,7 +202,7 @@ namespace riminder.route
             }
         }
 
-        class Rating
+        public class Rating
         {
             private RestClientW _client;
             public Rating(ref RestClientW client)
@@ -221,7 +235,7 @@ namespace riminder.route
             }
         }
 
-        class Structured
+        public class Structured
         {
             private RestClientW _client;
             public Structured(ref RestClientW client)

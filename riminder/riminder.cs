@@ -22,6 +22,9 @@ namespace riminder
         private RestClientW _client;
 
         public riminder.route.Source source {get;}
+        public riminder.route.Filter filter {get;}
+        public riminder.route.Profile profile {get;}
+        public riminder.route.Webhook webhooks {get;}
 
         private static string setstringWthDefault(string value, string dft)
         {
@@ -46,6 +49,9 @@ namespace riminder
             _client = new RestClientW(_url, _headers);
 
             source = new riminder.route.Source(ref _client);
+            filter = new riminder.route.Filter(ref _client);
+            profile = new riminder.route.Profile(ref _client);
+            webhooks = new riminder.route.Webhook(ref _client, _webhook_key);
         }
     }
 }
