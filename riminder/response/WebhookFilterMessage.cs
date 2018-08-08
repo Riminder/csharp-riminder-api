@@ -3,16 +3,24 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class WebhookFilterTrain
+    class WebhookFilterTrain : IWebhookMessage
     {
         public string type;
+        public string EventName
+        {
+            get { return type; }
+        }
         public string message;
         public WebhookFilter filter;
     }
 
-    class WebhookFilterScore
+    class WebhookFilterScore : IWebhookMessage
     {
         public string type;
+        public string EventName
+        {
+            get { return type; }
+        }
         public string message;
         public WebhookFilter filter;
     }

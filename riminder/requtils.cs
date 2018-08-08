@@ -61,5 +61,11 @@ namespace riminder
             public const string LATER = "later";
             public const string NO = "no";
         }
+
+        public static string Base64Decode(string input)
+        {
+            var input_b64byte = System.Convert.FromBase64String(input);
+            return System.Text.Encoding.UTF8.GetString(input_b64byte);
+        }
     }
 }
