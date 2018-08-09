@@ -48,13 +48,13 @@ namespace riminder.route
             string date_start = _start_timestamp, 
             string date_end = null, 
             int page = 1, 
-            string seniority = RequestUtils.Seniority.ALL,
+            string seniority = RequestConstant.Seniority.ALL,
             string filter_id = null,
             string filter_reference = null,
             string stage = null,
             int rating = 1,
-            string sort_by = RequestUtils.Sortby.RECEPTION,
-            string order_by = RequestUtils.Orderby.DESC)
+            string sort_by = RequestConstant.Sortby.RECEPTION,
+            string order_by = RequestConstant.Orderby.DESC)
             {
                 var query = new Dictionary<string, string> {
                     {"source_ids", JsonConvert.SerializeObject(source_ids)},

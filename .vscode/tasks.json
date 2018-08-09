@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/csharp-riminder-api.csproj"
+                "${workspaceFolder}/riminder/csharp-riminder-api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

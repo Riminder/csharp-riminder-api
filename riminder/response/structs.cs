@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class ProfileJson
+    public class ProfileJson
     {
         public string name;
         public string email;
@@ -57,7 +57,7 @@ namespace riminder.response
         }
     }
 
-    class Date
+    public class Date
     {
         public string date { get; set; }
         public int timezone_type { get; set; }
@@ -65,13 +65,13 @@ namespace riminder.response
         public string timezone { get; set; }
     }
 
-    class ScoringTemplate
+    public class ScoringTemplate
     {
         public string name;
     }
 
     // It can be part of request sometimes.
-    class TrainingMetadatas : List<TrainingMetadata>
+    public class TrainingMetadatas : List<TrainingMetadata>
     {
         public TrainingMetadatas() : base()
         { }
@@ -87,7 +87,7 @@ namespace riminder.response
         }
     }
 
-    class TrainingMetadata
+    public class TrainingMetadata
     {
         public string filter_reference;
         public string stage;
@@ -107,13 +107,13 @@ namespace riminder.response
         }
     }
 
-    class WebhookProfile
+    public class WebhookProfile
     {
         public string profile_id;
         public string profile_reference;
     }
 
-    class WebhookFilter
+    public class WebhookFilter
     {
         public string filter_id;
         public string filter_reference;

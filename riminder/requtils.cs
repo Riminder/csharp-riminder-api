@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("riminder.Tests")]
 namespace riminder
 {
     class RequestUtils
     {
-        public static Dictionary<string, object>addIfNotNull(ref Dictionary<string, object> to_fill, string key, object value)
+        public static Dictionary<string, object> addIfNotNull(ref Dictionary<string, object> to_fill, string key, object value)
         {
             if (value == null)
                 return to_fill;
@@ -33,33 +35,6 @@ namespace riminder
         {
             if (is_empty(id) && is_empty(reff))
                 throw new riminder.exp.RiminderArgumentException(message);
-        }
-
-        public class Seniority
-        {
-            public const string ALL = "all";
-            public const string SENIOR = "senior";
-            public const string JUNIOR = "junior";
-        }
-
-        public class Sortby
-        {
-            public const string RECEPTION = "reception";
-            public const string RANKING = "ranking";
-        }
-
-        public class Orderby
-        {
-            public const string DESC = "desc";
-            public const string ASC = "asc";
-        }
-
-        public class Stage
-        {
-            public const string NEW = "new"; 
-            public const string YES = "yes";
-            public const string LATER = "later";
-            public const string NO = "no";
         }
 
         public static string Base64Decode(string input)
