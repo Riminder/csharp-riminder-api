@@ -8,7 +8,7 @@ namespace riminder.route
     public class Profile
     {
         private RestClientW _client;
-        private const string _start_timestamp = "1407423743";
+        private const long _start_timestamp = 1407423743;
 
         public Structured json;
         public Documents documents;
@@ -29,24 +29,31 @@ namespace riminder.route
             rating = new Rating(_client);
         }
 
-        public response.Profile_post add(string source_id, string file_path, string profile_reference, long timestamp_reception, response.TrainingMetadatas training_metadatas)
+        public response.Profile_post add(string source_id, 
+            string file_path, string profile_reference = null, 
+            long timestamp_reception = -1, 
+            response.TrainingMetadatas training_metadatas = null)
         {
-            training_metadatas.is_valid(isExp:true);
+            if (training_metadatas != null)
+                training_metadatas.is_valid(isExp:true);
+
             var body = new Dictionary<string, object>
             {
                 {"source_id", source_id}
             };
+            // timestamp as a long can not be null
+            if (timestamp_reception != -1)
+                body.Add("timestamp_reception", timestamp_reception);
             RequestUtils.addIfNotNull(ref body, "profile_reference", profile_reference);
-            RequestUtils.addIfNotNull(ref body, "timestamp_reception", timestamp_reception);
             RequestUtils.addIfNotNull(ref body, "training_metadata", training_metadatas);
 
-            var resp = _client.post<response.Profile_post>("profile", body, file_path);
+            var resp = _client.post<response.Profile_post>("profile", body, file_path, false);
             return resp.data;
         }
 
         public response.ProfileList list(List<string> source_ids, 
-            string date_start = _start_timestamp, 
-            string date_end = null, 
+            long date_start = _start_timestamp, 
+            long date_end = -1, 
             int page = 1, 
             string seniority = RequestConstant.Seniority.ALL,
             string filter_id = null,
@@ -56,10 +63,12 @@ namespace riminder.route
             string sort_by = RequestConstant.Sortby.RECEPTION,
             string order_by = RequestConstant.Orderby.DESC)
             {
+                if (date_end == -1)
+                    date_end = (Int64)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                 var query = new Dictionary<string, string> {
                     {"source_ids", JsonConvert.SerializeObject(source_ids)},
-                    {"date_start", date_start},
-                    {"date_end", date_end},
+                    {"date_start", date_start.ToString()},
+                    {"date_end", date_end.ToString()},
                     {"page", page.ToString()},
                     {"rating", rating.ToString()},
                     {"seniority", seniority},

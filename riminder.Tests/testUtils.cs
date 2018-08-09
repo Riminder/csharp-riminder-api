@@ -10,6 +10,15 @@ namespace riminder.UnitTests
         private static TestHelper instance = null;
         private static readonly object mutx = new object();
 
+        private static List<string> _stage_list = new List<string>
+        {
+            {riminder.RequestConstant.Stage.LATER},
+            {riminder.RequestConstant.Stage.NEW},
+            {riminder.RequestConstant.Stage.NO},
+            {null},
+            {null}
+        };
+
         string _source_id;
         string _profile_id;
         string _profile_reference;
@@ -19,13 +28,17 @@ namespace riminder.UnitTests
         string _webhook_key;
         string _secret_key;
         string _source_name;
+        string _cv_path;
+        string _cv_dir;
         Riminder _client;
 
         TestHelper()
         {
             _webhook_key = "som reallllllllly good key";
-            _secret_key = "";
-            _source_name = "sdk_test";    
+            _secret_key = "ask_4b7fa33174a7113fbd16d806dbd21c07";
+            _source_name = "sdk_test";
+            _cv_path = "./assets/cv_test00.jpg";
+            _cv_dir = "./assets/for_batch";  
             _client = new Riminder(_secret_key, _webhook_key);
         }
 
@@ -50,6 +63,16 @@ namespace riminder.UnitTests
             }
         }
 
+        public string CvPath
+        {
+            get { return _cv_path; }
+        }
+
+        public string CvDir
+        {
+            get { return _cv_dir; }
+        }
+
         public string Source_id
         {
             get
@@ -65,7 +88,8 @@ namespace riminder.UnitTests
                     else
                         throw new riminder.exp.RiminderArgumentException(String.Format("Source {0} not found", _source_name));
                 }
-                _source_id = sources[0].source_id;
+                else
+                    _source_id = sources[0].source_id;
                 return _source_id;
             }
         }
@@ -143,6 +167,22 @@ namespace riminder.UnitTests
                 return true;
             }
             return date.date != null && date.timezone != null;
+        }
+
+        public riminder.response.TrainingMetadatas gen_metadatas()
+        {
+            var rnd = new Random();
+            var res = new riminder.response.TrainingMetadatas();
+            var elem = new riminder.response.TrainingMetadata();
+            elem.filter_reference = this.Filter_reference;
+            elem.stage = _stage_list[rnd.Next(0, _stage_list.Count)];
+            elem.rating = rnd.Next(1, 5);
+            if (elem.stage != null)
+                elem.stage_timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            if (elem.rating < 5)
+                elem.rating_timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            res.Add(elem);
+            return res;
         }
 
     }

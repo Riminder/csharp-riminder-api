@@ -33,6 +33,16 @@ namespace riminder
             }
         }
 
+        private void fill_params(ref RestRequest req, RequestBodyParams args)
+        {
+            if (args == null)
+                return;
+            foreach (var arg in args)
+            {
+                req.AddParameter(arg.Key, arg.Value);
+            }
+        }
+
         private void add_file_to_req(ref RestRequest req, string file_path)
         {
             if (RequestUtils.is_empty(file_path))
@@ -46,9 +56,8 @@ namespace riminder
             {
                 throw new exp.RiminderFileUploadException(file_path, ex.Message);
             }
-            
-            var filename = Path.GetFileName(file_path);
-            req.AddFile(filename, file_path);
+
+            req.AddFile("file", file_path);
         }
 
         private void fill_body_params(ref RestRequest req, RequestBodyParams bodyp, bool isJson = true)
@@ -57,7 +66,7 @@ namespace riminder
                 return;
             if (!isJson)
             {
-                req.AddBody(bodyp);
+                fill_params(ref req, args:bodyp);
                 return;
             }
             req.AddJsonBody(bodyp); 

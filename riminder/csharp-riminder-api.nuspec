@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>riminder</id>
+    <version>0.0.1-alpha</version>
+    <title>Riminder c# api client.</title>
+    <authors>riminder</authors>
+    <owners>$author$</owners>
+    <iconUrl>https://riminder.net//sf/uploads/company/logo/ad710f6a9a42ede1e797254bd163e95aba0834c1.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>An api client for riminder. It is meant to be use with riminder's api.</description>
+    <releaseNotes>...</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>Riminder riminder riminderapi riminderclient riminderapiclient client api</tags>
+  </metadata>
+</package>

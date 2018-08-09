@@ -50,9 +50,25 @@ namespace riminder.UnitTests.route
             }
 
             [Fact]
+            public void TestKO_id()
+            {
+
+                Assert.Throws<riminder.exp.RiminderResponseException>(
+                    () => client.filter.get(filter_id: "hahahahahahah"));
+            }
+
+            [Fact]
             public void TestOK_reference()
             {
                 client.filter.get(filter_reference:thelper.Filter_reference);
+            }
+
+            [Fact]
+            public void TestKO_reference()
+            {
+
+                Assert.Throws<riminder.exp.RiminderResponseException>(
+                    () => client.filter.get(filter_reference: "hope it will never be a valid refence :/"));
             }
         }
     }

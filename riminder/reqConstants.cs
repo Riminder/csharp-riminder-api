@@ -25,10 +25,10 @@ namespace riminder
 
         public class Stage
         {
-            public const string NEW = "new";
-            public const string YES = "yes";
-            public const string LATER = "later";
-            public const string NO = "no";
+            public const string NEW = "NEW";
+            public const string YES = "YES";
+            public const string LATER = "LATER";
+            public const string NO = "NO";
         }
     }
 }
