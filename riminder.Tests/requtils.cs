@@ -151,6 +151,7 @@ namespace riminder.UnitTests
                     JsonConvert.SerializeObject(res));
 
                 Assert.True(is_dict_equal<string, string>(res, test.Value.expected_result), mess);
+                Assert.True(is_dict_equal<string, string>(test.Value.to_fill, test.Value.expected_result), mess);
             }
         }
 
@@ -167,6 +168,7 @@ namespace riminder.UnitTests
                     JsonConvert.SerializeObject(res));
 
                 Assert.True(is_dict_equal<string, object>(res, test.Value.expected_result), mess);
+                Assert.True(is_dict_equal<string, object>(test.Value.to_fill, test.Value.expected_result), mess);
             }
         }
     }

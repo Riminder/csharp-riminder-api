@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace riminder.route
 {
 
-    class Profile
+    public class Profile
     {
         private RestClientW _client;
         private const string _start_timestamp = "1407423743";
@@ -17,16 +17,16 @@ namespace riminder.route
         public Stage stage;
         public Rating rating;
 
-        public Profile(ref RestClientW client)
+        public Profile(object client)
         {
-            _client = client;
+            _client = (RestClientW)client;
 
-            json = new Structured(ref _client);
-            documents = new Documents(ref _client);
-            parsing = new Parsing(ref _client);
-            scoring = new Scoring(ref _client);
-            stage = new Stage(ref _client);
-            rating = new Rating(ref _client);
+            json = new Structured(_client);
+            documents = new Documents(_client);
+            parsing = new Parsing(_client);
+            scoring = new Scoring(_client);
+            stage = new Stage(_client);
+            rating = new Rating(_client);
         }
 
         public response.Profile_post add(string source_id, string file_path, string profile_reference, long timestamp_reception, response.TrainingMetadatas training_metadatas)
@@ -94,9 +94,9 @@ namespace riminder.route
         public class Documents
         {
             private RestClientW _client;
-            public Documents(ref RestClientW client)
+            public Documents(object client)
             {
-                _client = client;
+                _client = (RestClientW)client;
             }
 
             public response.ProfileDocument_list list(string source_id, string profile_id = null, string profile_reference = null)
@@ -120,9 +120,9 @@ namespace riminder.route
         public class Parsing
         {
             private RestClientW _client;
-            public Parsing(ref RestClientW client)
+            public Parsing(object client)
             {
-                _client = client;
+                _client = (RestClientW)client;
             }
 
             public response.ProfileParsing list(string source_id, string profile_id = null, string profile_reference = null)
@@ -146,9 +146,9 @@ namespace riminder.route
         public class Scoring
         {
             private RestClientW _client;
-            public Scoring(ref RestClientW client)
+            public Scoring(object client)
             {
-                _client = client;
+                _client = (RestClientW)client;
             }
 
             public response.ProfileScoringList list(string source_id, string profile_id = null, string profile_reference = null)
@@ -172,9 +172,9 @@ namespace riminder.route
         public class Stage
         {
             private RestClientW _client;
-            public Stage(ref RestClientW client)
+            public Stage(object client)
             {
-                _client = client;
+                _client = (RestClientW)client;
             }
 
             public response.ProfileStage set(string source_id, string stage,
@@ -205,9 +205,9 @@ namespace riminder.route
         public class Rating
         {
             private RestClientW _client;
-            public Rating(ref RestClientW client)
+            public Rating(object client)
             {
-                _client = client;
+                _client = (RestClientW)client;
             }
 
             public response.ProfileRating set(string source_id, string rating,
@@ -238,9 +238,9 @@ namespace riminder.route
         public class Structured
         {
             private RestClientW _client;
-            public Structured(ref RestClientW client)
+            public Structured(object client)
             {
-                _client = client;
+                _client = (RestClientW)client;
             }
 
             public response.ProfileRating check(string source_id, string rating,

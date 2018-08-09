@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace riminder
 {
-    class Riminder
+    public class Riminder
     {
         private static string DEFAULT_URL = "https://www.riminder.net/sf/public/api/";
         private static string DEFAULT_HOST_BASE = "v1.0";
@@ -48,10 +48,10 @@ namespace riminder
             _headers["X-API-KEY"] = _secret_key;
             _client = new RestClientW(_url, _headers);
 
-            source = new riminder.route.Source(ref _client);
-            filter = new riminder.route.Filter(ref _client);
-            profile = new riminder.route.Profile(ref _client);
-            webhooks = new riminder.route.Webhook(ref _client, _webhook_key);
+            source = new riminder.route.Source( _client);
+            filter = new riminder.route.Filter(_client);
+            profile = new riminder.route.Profile( _client);
+            webhooks = new riminder.route.Webhook( _client, _webhook_key);
         }
     }
 }

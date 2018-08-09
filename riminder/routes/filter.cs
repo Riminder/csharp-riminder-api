@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 namespace riminder.route
 {
-    class Filter
+    public class Filter
     {
         private RestClientW _client;
 
-        public Filter(ref RestClientW client)
+        // To avoid incoherente type availabilitie
+        public Filter(object client)
         {
-            _client = client;
+            _client = (RestClientW)client;
         }
 
         public response.FilterList list()
@@ -28,7 +29,7 @@ namespace riminder.route
             riminder.RequestUtils.addIfNotNull(ref query, "filter_id", filter_id);
             riminder.RequestUtils.addIfNotNull(ref query, "filter_reference", filter_reference);
             
-            var resp = _client.get<riminder.response.Filter_get>("filter");
+            var resp = _client.get<riminder.response.Filter_get>("filter", query);
             return resp.data;
         }
     }

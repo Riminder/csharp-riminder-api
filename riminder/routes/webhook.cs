@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace riminder.route
 {
-    class Webhook
+    public class Webhook
     {
         private const string HEADER_SIGNATURE_KEY = "HTTP-RIMINDER-SIGNATURE";
         public delegate void WebhookHandler(string eventName, response.IWebhookMessage webhook_data);
@@ -41,9 +41,9 @@ namespace riminder.route
             public const string ACTION_STAGE_ERROR = "action.stage.error";
         }
 
-        public Webhook(ref RestClientW client, string key)
+        public Webhook(object client, string key)
         {
-            _client = client;
+            _client = (RestClientW)client;
             _key = key;
             _handlers = new Dictionary<string, WebhookHandler>
             {

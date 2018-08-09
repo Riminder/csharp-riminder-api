@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class ProfileRating
+    public class ProfileRating
     {
         public string profile_id;
         public string profile_reference;

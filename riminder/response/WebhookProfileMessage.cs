@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class WebhookProfileParse : IWebhookMessage
+    public class WebhookProfileParse : IWebhookMessage
     {
         public string type;
         public string EventName
@@ -14,7 +14,7 @@ namespace riminder.response
         public WebhookProfile profile;
     }
 
-    class WebhookProfileScore : IWebhookMessage
+    public class WebhookProfileScore : IWebhookMessage
     {
         public string type;
         public string EventName

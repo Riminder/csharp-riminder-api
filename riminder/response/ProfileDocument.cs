@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class ProfileDocument_list: List<ProfileDocumentListElem>, IResponse
+    public class ProfileDocument_list: List<ProfileDocumentListElem>, IResponse
     {
         public ProfileDocument_list(): base()
         { }
     }
 
-    class ProfileDocumentListElem
+    public class ProfileDocumentListElem
     {
         public string type;
         public string file_name;

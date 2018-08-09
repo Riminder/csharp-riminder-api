@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class ProfileParsing
+    public class ProfileParsing
     {
         public List<string> hard_skills;
         public List<string> soft_skills;

@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class Profile_post : IResponse
+    public class Profile_post : IResponse
     {
         public string profile_reference;
         public string file_id;
@@ -12,7 +13,7 @@ namespace riminder.response
         public Date date_reception;
     }
 
-    class Profile_get: IResponse
+    public class Profile_get: IResponse
     {
         public string profile_id;
         public string profile_reference;
@@ -25,14 +26,15 @@ namespace riminder.response
         public Date date_creation;
     }
 
-    class ProfileList : IResponse
+    public class ProfileList : IResponse
     {
         public int page;
         public int maxPage;
         public int count_profiles;
+        public List<ProfileListElem> profiles;
     }
 
-    class ProfileListElem
+    public class ProfileListElem
     {
         public class Source
         {

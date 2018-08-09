@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class Source_get: IResponse
+    public class Source_get: IResponse
     {
         public string source_id;
         public string name;
@@ -13,12 +13,12 @@ namespace riminder.response
         public Date date_creation;
     }
 
-    class SourceList : List<SourceListElem>, IResponse
+    public class SourceList : List<SourceListElem>, IResponse
     {
         public SourceList() : base()
         { }
     }
-    class SourceListElem
+    public class SourceListElem
     {
         public string source_id;
         public string name;

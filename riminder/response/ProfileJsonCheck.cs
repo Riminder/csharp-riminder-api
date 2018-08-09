@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class ProfileJsonCheck
+    public class ProfileJsonCheck
     {
         public ProfileJson profile_json;
         public TrainingMetadatas training_metadata;

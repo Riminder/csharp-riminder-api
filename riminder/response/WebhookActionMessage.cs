@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class WebhookActionStage : IWebhookMessage
+    public class WebhookActionStage : IWebhookMessage
     {
         public string type;
         public string EventName
@@ -16,7 +16,7 @@ namespace riminder.response
         string stage;
     }
 
-    class WebhookActionRating : IWebhookMessage
+    public class WebhookActionRating : IWebhookMessage
     {
         public string type;
         public string EventName

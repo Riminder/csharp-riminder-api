@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class ProfileJson_post
+    public class ProfileJson_post
     {
         public string profile_id;
         public string source_id;

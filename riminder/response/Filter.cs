@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace riminder.response
 {
-    class Filter_get: IResponse
+    public class Filter_get: IResponse
     {
         public class Template
         {
@@ -32,13 +32,13 @@ namespace riminder.response
 
     }
     
-    class FilterList : List<FilterListElem>, IResponse
+    public class FilterList : List<FilterListElem>, IResponse
     {
         public FilterList() : base()
         { }
     }
 
-    class FilterListElem
+    public class FilterListElem
     {
         public string filter_id;
         public string filter_reference;

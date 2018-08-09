@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace riminder.route
 {
-    class Source
+    public class Source
     {
         private RestClientW _client;
-        public Source(ref RestClientW client)
+        public Source(object client)
         {
-            _client = client;
+            _client = (RestClientW)client;
         }
 
         public response.SourceList list()
