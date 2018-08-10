@@ -72,16 +72,28 @@ namespace riminder
             req.AddJsonBody(bodyp); 
         }
 
+        // Replacee "key":[] by "key": null to avoid problems with the parser
+        private string prepare_response(string response)
+        {
+            var r = String.Format("\":{0}[{1}]", '\\', '\\');
+            var rgx = new System.Text.RegularExpressions.Regex(r);
+            return rgx.Replace(response, "\":null");
+        }
+
         private response.BaseResponse<T> deserializeResponse<T>(string response)
         {
             response.BaseResponse<T> respObj = null;
+            response = prepare_response(response);
             try
             {
+                // respObj = SimpleJson.SimpleJson.DeserializeObject<response.BaseResponse<T>>(response);
                 respObj = JsonConvert.DeserializeObject<response.BaseResponse<T>>(response);
             }
             catch (JsonException e)
             {
-                throw new exp.RiminderResponseParsingException("Cannot parse api's response.", e);
+                var debugmess = String.Format("Connot parse api's response. {0}", response);
+                throw new exp.RiminderResponseParsingException(debugmess, e);
+                // throw new exp.RiminderResponseParsingException("Cannot parse api's response.", e);
             }
             return respObj;
         }

@@ -23,7 +23,7 @@ namespace riminder.route
         private Dictionary<string, WebhookHandler> _handlers;
         private Dictionary<string, WebhookMessageParser> _typeobj;
 
-        class EventNames
+        public class EventNames
         {
             public const string PROFILE_PARSE_SUCCESS = "profile.parse.success";
             public const string PROFILE_PARSE_ERROR = "profile.parse.error";
@@ -93,7 +93,7 @@ namespace riminder.route
         {
             if (!_handlers.ContainsKey(eventName))
                 throw new exp.RiminderArgumentException(String.Format("'{0}' is not a valid event name.", eventName));
-            _handlers.Add(eventName, callback);
+            _handlers[eventName] = callback;
         }
 
         public bool isHandlerPresent(string eventName)
@@ -143,12 +143,14 @@ namespace riminder.route
 
         private bool isSignatureValid(string payload, string sign)
         {
-            var byte_payload = System.Text.Encoding.ASCII.GetBytes(payload);
-            var byte_key = System.Text.Encoding.ASCII.GetBytes(_key);
-            var byte_sign = System.Text.Encoding.ASCII.GetBytes(sign);
+            var byte_payload = System.Text.Encoding.UTF8.GetBytes(payload);
+            var byte_key = System.Text.Encoding.UTF8.GetBytes(_key);
+            var byte_sign = System.Text.Encoding.UTF8.GetBytes(sign);
             var hasher = new System.Security.Cryptography.HMACSHA256(byte_key);
 
-            var expectedsign = hasher.ComputeHash(byte_payload);
+            var expectedsign_byte = hasher.ComputeHash(byte_payload);
+            var expectedsign = System.Text.Encoding.UTF8.GetString(expectedsign_byte);
+            // throw new exp.RiminderWebhookSignatureException(String.Format("{0} - {1}", expectedsign, sign), "...");
             return expectedsign.Equals(sign) ? true : false;
         }
 

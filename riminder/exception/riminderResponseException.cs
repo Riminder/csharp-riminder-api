@@ -17,15 +17,18 @@ namespace riminder.exp
 
         private static string extractApiErrorMessage(string rawResp)
         {
-            var apiMessage = "";
+            var apiMessage = "---";
             try
             {
                 var r = JsonConvert.DeserializeObject<Dictionary<string, object>>(rawResp);
-                apiMessage = (string)r["message"];
+                if (r != null)
+                    apiMessage = (string)r["message"];
+                else
+                    apiMessage = "...";
             }
-            catch (JsonException)
+            catch (JsonException ex)
             {
-                apiMessage = "...";
+                apiMessage = String.Format("Can not extract response message: {0}.", ex.Message);
             }
             return apiMessage;
         }

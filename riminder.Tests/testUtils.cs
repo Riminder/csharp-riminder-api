@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System;
 
+using Newtonsoft.Json;
+
 using riminder;
 
 namespace riminder.UnitTests
@@ -38,7 +40,10 @@ namespace riminder.UnitTests
             _secret_key = "ask_4b7fa33174a7113fbd16d806dbd21c07";
             _source_name = "sdk_test";
             _cv_path = "./assets/cv_test00.jpg";
-            _cv_dir = "./assets/for_batch";  
+            _cv_dir = "./assets/for_batch"; 
+
+            _profile_id = "cecd9fa83b7e2c5c8e8af17839cadde6fa807c3e";
+            _profile_reference = "5279";
             _client = new Riminder(_secret_key, _webhook_key);
         }
 
@@ -184,6 +189,100 @@ namespace riminder.UnitTests
             res.Add(elem);
             return res;
         }
+
+        public static riminder.response.ProfileJson gen_profileJson()
+        {
+            var profileJson = new riminder.response.ProfileJson()
+            {
+                name = "Salvor Hardin",
+                email = "sssalvorrr.54haaardiiin@gmail.com",
+                phone = "0678524695",
+                summary = "Former mayor of Terminus I resolve one of the first Sheldon Crisis.",
+                location_details = new riminder.response.ProfileJson.LocationDetails()
+                {
+                    text = "Terminus, Terminus"
+                },
+                experiences = new List<riminder.response.ProfileJson.Experience>()
+                {
+                    {new riminder.response.ProfileJson.Experience
+                    {
+                        start = "21/1/45",
+                        end = "12/12/55",
+                        title = "Mayor",
+                        company = "Fondation",
+                        location = null,
+                        location_details = new riminder.response.ProfileJson.LocationDetails()
+                        {
+                            text = "Terminus, Terminus"
+                        },
+                        description = "Save the Fondation."
+                    }}
+                },
+                educations = new List<riminder.response.ProfileJson.Education>()
+                {
+                    {new riminder.response.ProfileJson.Education
+                    {
+                        start = "21/1/30",
+                        end = "12/12/40",
+                        title = "something",
+                        school = "Fondation hard school",
+                        location = null,
+                        location_details = new riminder.response.ProfileJson.LocationDetails()
+                        {
+                            text = "Terminus, Terminus"
+                        },
+                        description = "..."
+                    }}
+                },
+                skills = new List<string>()
+                {
+                    "diplomacy", "Politics", "Future Science", "Flight"
+                },
+                languages = new List<string>()
+                {
+                    "English"
+                },
+                interests = new List<string>()
+                {
+                    "cigar", "Fondation"
+                },
+                urls = new riminder.response.ProfileJson.Urls()
+                {
+                    from_resume = new List<string>(),
+                    linkedin = null,
+                }
+                
+            };
+            return profileJson;
+        }
+
+        public Dictionary<string, string> gen_encodedHeaders()
+        {
+            var payload = new riminder.response.WebhookProfileParse()
+            {
+                type = riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
+                message = "Yey it's parsed ! :) (not actually a true message)",
+                profile = new riminder.response.WebhookProfile()
+                {
+                    profile_id = "some complicated id",
+                    profile_reference = "some simple reference"
+                }
+            };
+            var json_payload = JsonConvert.SerializeObject(payload);
+            var byte_json_payload = System.Text.Encoding.UTF8.GetBytes(json_payload);
+            var byte_key = System.Text.Encoding.UTF8.GetBytes(_webhook_key);
+            
+            var hasher = new System.Security.Cryptography.HMACSHA256(byte_key);
+
+            var encoded_sign = hasher.ComputeHash(byte_json_payload);
+
+            var b64_sign = System.Convert.ToBase64String(encoded_sign);
+            var b64_payload = System.Convert.ToBase64String(byte_json_payload);
+            var res = String.Concat(b64_sign, ".", b64_payload);
+
+            return new Dictionary<string, string>(){{"HTTP-RIMINDER-SIGNATURE", res}};
+        }    
+    
 
     }
 }

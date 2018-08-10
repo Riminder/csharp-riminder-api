@@ -9,6 +9,7 @@ namespace csharp_riminder_api
     {
         static void Main(string[] args)
         {
+            var lo = JsonConvert.DeserializeObject<Dictionary<string, object>>("{\"zap\":[]}");
             var api = new riminder.Riminder("ask_4b7fa33174a7113fbd16d806dbd21c07");
             
             var resp = api.filter.get(filter_reference:"12345");

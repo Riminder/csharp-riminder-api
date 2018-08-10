@@ -54,14 +54,15 @@ namespace riminder.route
         public response.ProfileList list(List<string> source_ids, 
             long date_start = _start_timestamp, 
             long date_end = -1, 
-            int page = 1, 
+            int page = 1,
+            int limit = 30,
             string seniority = RequestConstant.Seniority.ALL,
             string filter_id = null,
             string filter_reference = null,
             string stage = null,
-            int rating = 1,
-            string sort_by = RequestConstant.Sortby.RECEPTION,
-            string order_by = RequestConstant.Orderby.DESC)
+            int rating = -1,
+            string sort_by = null,
+            string order_by = null)
             {
                 if (date_end == -1)
                     date_end = (Int64)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
@@ -70,16 +71,18 @@ namespace riminder.route
                     {"date_start", date_start.ToString()},
                     {"date_end", date_end.ToString()},
                     {"page", page.ToString()},
-                    {"rating", rating.ToString()},
+                    {"limit", limit.ToString()},
                     {"seniority", seniority},
-                    {"stage", stage},
-                    {"sort_by", sort_by},
-                    {"order_by", order_by}
                 };
                 RequestUtils.addIfNotNull(ref query, "filter_id", filter_id);
                 RequestUtils.addIfNotNull(ref query, "filter_reference", filter_reference);
+                RequestUtils.addIfNotNull(ref query, "order_by", order_by);
+                RequestUtils.addIfNotNull(ref query, "sort_by", sort_by);
+                RequestUtils.addIfNotNull(ref query, "stage", stage);
+                if (rating != -1)
+                    query["rating"] = rating.ToString();
 
-                var resp = _client.get<response.ProfileList>("profiles", query);
+                var resp = _client.get<response.ProfileList>("profiles", args:query);
                 return resp.data;
             }
 
@@ -134,7 +137,7 @@ namespace riminder.route
                 _client = (RestClientW)client;
             }
 
-            public response.ProfileParsing list(string source_id, string profile_id = null, string profile_reference = null)
+            public response.ProfileParsing get(string source_id, string profile_id = null, string profile_reference = null)
             {
                 // To avoid a line of about 30000 column.
                 var mess = String.Format("One beetween profile_id and profile_reference has to be not null or empty. (profile_id: {0} profile_reference: {1})", profile_id, profile_reference);
@@ -219,7 +222,7 @@ namespace riminder.route
                 _client = (RestClientW)client;
             }
 
-            public response.ProfileRating set(string source_id, string rating,
+            public response.ProfileRating set(string source_id, int rating,
                 string profile_id = null, string profile_reference = null,
                 string filter_id = null, string filter_reference = null)
             {
@@ -252,29 +255,35 @@ namespace riminder.route
                 _client = (RestClientW)client;
             }
 
-            public response.ProfileRating check(string source_id, string rating,
-                string profile_id = null, string profile_reference = null,
-                string filter_id = null, string filter_reference = null)
+            public response.ProfileJsonCheck check(response.ProfileJson profile_data, response.TrainingMetadatas training_metadata = null)
             {
-                // To avoid a line of about 30000 column.
-                var mess = String.Format("One beetween profile_id and profile_reference has to be not null or empty. (profile_id: {0} profile_reference: {1})", profile_id, profile_reference);
-                RequestUtils.assert_id_ref_notNull(profile_id, profile_reference, mess);
-                mess = String.Format("One beetween filter_id and filter_reference has to be not null or empty. (filter_id: {0} filter_reference: {1})", filter_id, filter_reference);
-                RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
-
                 var bodyParams = new Dictionary<string, object>
                 {
-                    {"source_id", source_id},
-                    {"rating", rating}
+                    {"profile_json", profile_data},
                 };
-                RequestUtils.addIfNotNull(ref bodyParams, "profile_id", profile_id);
-                RequestUtils.addIfNotNull(ref bodyParams, "profile_reference", profile_reference);
-                RequestUtils.addIfNotNull(ref bodyParams, "filter_id", filter_id);
-                RequestUtils.addIfNotNull(ref bodyParams, "filter_reference", filter_reference);
+                RequestUtils.addIfNotNull(ref bodyParams, "training_metadata", training_metadata);
 
-                var resp = _client.patch<response.ProfileRating>("profile/rating", args: bodyParams);
+                var resp = _client.post<response.ProfileJsonCheck>("profile/json/check", args: bodyParams);
                 return resp.data;
-            } 
+            }
+
+            public response.ProfileJson_post add(string source_id, response.ProfileJson profile_data, 
+                string profile_reference = null, long timestamp_reception = -1,
+                response.TrainingMetadatas training_metadata = null)
+                {
+                var bodyParams = new Dictionary<string, object>
+                {
+                    {"profile_json", profile_data},
+                    {"source_id", source_id}
+                };
+                if (timestamp_reception != -1)
+                    bodyParams.Add("timestamp_reception", timestamp_reception);
+                RequestUtils.addIfNotNull(ref bodyParams, "training_metadata", training_metadata);
+                RequestUtils.addIfNotNull(ref bodyParams, "profile_reference", profile_reference);
+
+                var resp = _client.post<response.ProfileJson_post>("profile/json", args: bodyParams);
+                return resp.data;
+                }
         }
     }
 }

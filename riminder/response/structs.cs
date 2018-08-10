@@ -11,8 +11,8 @@ namespace riminder.response
         public string phone;
         public string summary;
         public LocationDetails location_details;
-        public Experience experiences;
-        public Educations educations;
+        public List<Experience> experiences;
+        public List<Education> educations;
         public List<string> skills;
         public List<string> languages;
         public List<string> interests;
@@ -30,7 +30,7 @@ namespace riminder.response
             public string description;
         }
 
-        public class Educations
+        public class Education
         {
             public string start;
             public string end;
@@ -44,6 +44,9 @@ namespace riminder.response
         public class LocationDetails
         {
             public string text;
+            public float lng;
+            public float lat;
+            public string gmaps; 
         }
 
         public class Urls
