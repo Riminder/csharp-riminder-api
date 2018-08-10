@@ -29,8 +29,8 @@ namespace Riminder.UnitTests.route
             //Given
             var encoded_header = thelper.gen_encodedHeaders();
             string testname = "";
-            client.webhooks.setHandler(Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
-               delegate(string evtname, Riminder.response.IWebhookMessage mess) {testname = evtname;});
+            client.webhooks.setHandler(global::Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
+               delegate(string evtname, global::Riminder.response.IWebhookMessage mess) {testname = evtname;});
             
             //When
             client.webhooks.handle(encoded_header);
@@ -45,8 +45,8 @@ namespace Riminder.UnitTests.route
             //Given
             var encoded_header = thelper.gen_encodedHeaders();
             string testname = "";
-            client.webhooks.setHandler(Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
-               delegate (string evtname, Riminder.response.IWebhookMessage mess) { testname = evtname; });
+            client.webhooks.setHandler(global::Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
+               delegate (string evtname, global::Riminder.response.IWebhookMessage mess) { testname = evtname; });
 
             //When
             client.webhooks.handle(signatureHeader:encoded_header["HTTP-RIMINDER-SIGNATURE"]);
@@ -61,8 +61,8 @@ namespace Riminder.UnitTests.route
             //Given
             var encoded_header = thelper.gen_encodedHeaders();
             string testname = "";
-            client.webhooks.setHandler(Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
-               delegate (string evtname, Riminder.response.IWebhookMessage mess) { testname = evtname; });
+            client.webhooks.setHandler(global::Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
+               delegate (string evtname, global::Riminder.response.IWebhookMessage mess) { testname = evtname; });
             client.webhooks.removeHandler(global::Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS);
 
             //When
@@ -78,8 +78,8 @@ namespace Riminder.UnitTests.route
             //Given
             var encoded_header = thelper.gen_encodedHeaders();
             string testname = "";
-            client.webhooks.setHandler(Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
-               delegate (string evtname, Riminder.response.IWebhookMessage mess) { testname = evtname; });
+            client.webhooks.setHandler(global::Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
+               delegate (string evtname, global::Riminder.response.IWebhookMessage mess) { testname = evtname; });
 
             //When
             Assert.Throws<global::Riminder.exp.RiminderArgumentException>(() => client.webhooks.handle());

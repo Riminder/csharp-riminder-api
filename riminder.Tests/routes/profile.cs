@@ -64,9 +64,9 @@ namespace Riminder.UnitTests.route
             page: 1,
             seniority: global::Riminder.RequestConstant.Seniority.JUNIOR,
             filter_id: thelper.Filter_id,
-            stage: (string)global::riminder.RequestConstant.Stage.NEW,
-            sort_by: (string)global::riminder.RequestConstant.Sortby.RANKING,
-            order_by: (string)global::riminder.RequestConstant.Orderby.ASC);
+            stage: (string)global::Riminder.RequestConstant.Stage.NEW,
+            sort_by: (string)global::Riminder.RequestConstant.Sortby.RANKING,
+            order_by: (string)global::Riminder.RequestConstant.Orderby.ASC);
         }
 
         [Fact]
@@ -79,9 +79,9 @@ namespace Riminder.UnitTests.route
             page: 1,
             seniority: global::Riminder.RequestConstant.Seniority.JUNIOR,
             filter_reference: thelper.Filter_reference,
-            stage: (string)global::riminder.RequestConstant.Stage.NEW,
-            sort_by: (string)global::riminder.RequestConstant.Sortby.RANKING,
-            order_by: (string)global::riminder.RequestConstant.Orderby.ASC);
+            stage: (string)global::Riminder.RequestConstant.Stage.NEW,
+            sort_by: (string)global::Riminder.RequestConstant.Sortby.RANKING,
+            order_by: (string)global::Riminder.RequestConstant.Orderby.ASC);
         }
     }
 
@@ -334,7 +334,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
 (Func<object>)(() => client.profile.stage.set(thelper.Source_id,
-                 stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                 stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                  profile_id: thelper.Profile_id))
             );
         }
@@ -344,7 +344,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
 (Func<object>)(() => client.profile.stage.set(thelper.Source_id,
-                 stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                 stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                  filter_id: thelper.Filter_id))
             );
         }
@@ -354,7 +354,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
 (Func<object>)(() => client.profile.stage.set("not a good sdzdzddzdzddzdd source.",
-                stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                 profile_id: thelper.Profile_id,
                 filter_id: thelper.Filter_id))
             );
@@ -365,7 +365,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
 (Func<object>)(() => client.profile.stage.set(thelper.Source_id,
-               stage: (string)global::riminder.RequestConstant.Stage.LATER,
+               stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                profile_id: "Not a good profile id.dddsdzdzddzd",
                filter_id: thelper.Filter_id))
            );
@@ -376,7 +376,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
 (Func<object>)(() => client.profile.stage.set(thelper.Source_id,
-               stage: (string)global::riminder.RequestConstant.Stage.LATER,
+               stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                profile_id: thelper.Profile_id,
                filter_id: "Not a good filter id.dzdzdzdzdzdd"))
            );
@@ -387,7 +387,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
 (Func<object>)(() => client.profile.stage.set(thelper.Source_id,
-                stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                 profile_reference: "I'm not a good profile reddzdzddzdf",
                 filter_reference: thelper.Filter_reference))
             );
@@ -398,7 +398,7 @@ namespace Riminder.UnitTests.route
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
 (Func<object>)(() => client.profile.stage.set(thelper.Source_id,
-                stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                stage: (string)global::Riminder.RequestConstant.Stage.LATER,
                 profile_reference: thelper.Profile_reference,
                 filter_reference: "I'm not a good fildzdzdzddzdter ref"))
             );
