@@ -1,11 +1,11 @@
 using Xunit;
 using System;
 using System.Collections.Generic;
-using riminder.response;
+using Riminder.response;
 using Newtonsoft.Json;
 
 
-namespace riminder.UnitTests
+namespace Riminder.UnitTests
 {
     public class RequestUtils_Test
     {

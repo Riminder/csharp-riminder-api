@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace riminder.response
+namespace Riminder.response
 {
     public class ProfileJson
     {

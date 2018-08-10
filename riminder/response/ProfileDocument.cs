@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace riminder.response
+namespace Riminder.response
 {
     public class ProfileDocument_list: List<ProfileDocumentListElem>, IResponse
     {

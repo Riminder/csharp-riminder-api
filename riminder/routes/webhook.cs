@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace riminder.route
+namespace Riminder.route
 {
     public class Webhook
     {

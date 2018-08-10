@@ -1,6 +1,6 @@
 using System;
 
-namespace riminder.response
+namespace Riminder.response
 {
     public class WebhookCheck
     {

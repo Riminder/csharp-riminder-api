@@ -1,6 +1,6 @@
 using System;
 
-namespace riminder
+namespace Riminder
 {
     public class RequestConstant
     {

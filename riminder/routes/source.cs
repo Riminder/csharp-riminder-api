@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace riminder.route
+namespace Riminder.route
 {
     public class Source
     {
@@ -13,7 +13,7 @@ namespace riminder.route
 
         public response.SourceList list()
         {
-            var resp = _client.get<riminder.response.SourceList>("sources");
+            var resp = _client.get<global::Riminder.response.SourceList>("sources");
             return resp.data;
         }
 

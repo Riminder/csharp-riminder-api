@@ -4,7 +4,7 @@ using System.IO;
 using System.Collections.Generic; 
 using Newtonsoft.Json;
 
-namespace riminder.UnitTests.route
+namespace Riminder.UnitTests.route
 {
     public class Profile_Add
     {
@@ -62,11 +62,11 @@ namespace riminder.UnitTests.route
             date_start: 1060445571,
             date_end: 1533831171,
             page: 1,
-            seniority: riminder.RequestConstant.Seniority.JUNIOR,
+            seniority: global::Riminder.RequestConstant.Seniority.JUNIOR,
             filter_id: thelper.Filter_id,
-            stage: RequestConstant.Stage.NEW,
-            sort_by: RequestConstant.Sortby.RANKING,
-            order_by: RequestConstant.Orderby.ASC);
+            stage: (string)global::riminder.RequestConstant.Stage.NEW,
+            sort_by: (string)global::riminder.RequestConstant.Sortby.RANKING,
+            order_by: (string)global::riminder.RequestConstant.Orderby.ASC);
         }
 
         [Fact]
@@ -77,11 +77,11 @@ namespace riminder.UnitTests.route
             date_start: 1060445571,
             date_end: 1533831171,
             page: 1,
-            seniority: riminder.RequestConstant.Seniority.JUNIOR,
+            seniority: global::Riminder.RequestConstant.Seniority.JUNIOR,
             filter_reference: thelper.Filter_reference,
-            stage: RequestConstant.Stage.NEW,
-            sort_by: RequestConstant.Sortby.RANKING,
-            order_by: RequestConstant.Orderby.ASC);
+            stage: (string)global::riminder.RequestConstant.Stage.NEW,
+            sort_by: (string)global::riminder.RequestConstant.Sortby.RANKING,
+            order_by: (string)global::riminder.RequestConstant.Orderby.ASC);
         }
     }
 
@@ -105,7 +105,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badsource()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.get("zap", thelper.Profile_id)
             );
         }
@@ -113,7 +113,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_noIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
                 () => client.profile.get(thelper.Source_id)
             );
         }
@@ -121,7 +121,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.get(thelper.Source_id, "lol")
             );
         }
@@ -129,7 +129,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.get(thelper.Source_id, profile_reference:"lol")
             );
         }
@@ -155,7 +155,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_noIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
                 () => client.profile.documents.list(thelper.Source_id)
             );
         }
@@ -169,7 +169,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badsource()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.documents.list("zap", thelper.Profile_id)
             );
         }
@@ -177,7 +177,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.documents.list(thelper.Source_id, "lol")
             );
         }
@@ -185,7 +185,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.documents.list(thelper.Source_id, profile_reference: "lol")
             );
         }
@@ -217,7 +217,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_noIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
                 () => client.profile.parsing.get(thelper.Source_id)
             );
         }
@@ -225,7 +225,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badsource()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.parsing.get("zap", thelper.Profile_id)
             );
         }
@@ -233,7 +233,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.parsing.get(thelper.Source_id, "lol")
             );
         }
@@ -241,7 +241,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.parsing.get(thelper.Source_id, profile_reference: "lol")
             );
         }
@@ -273,7 +273,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_noIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
                 () => client.profile.scoring.list(thelper.Source_id)
             );
         }
@@ -281,7 +281,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badsource()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.scoring.list("zdsdsqds i'm a bad source sqfeap", thelper.Profile_id)
             );
         }
@@ -289,7 +289,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.scoring.list(thelper.Source_id, "Nope")
             );
         }
@@ -297,7 +297,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.scoring.list(thelper.Source_id, profile_reference: "I don't want that.")
             );
         }
@@ -332,75 +332,75 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_nofIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
-                () => client.profile.stage.set(thelper.Source_id,
-                 stage: RequestConstant.Stage.LATER,
-                 profile_id: thelper.Profile_id)
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
+(Func<object>)(() => client.profile.stage.set(thelper.Source_id,
+                 stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                 profile_id: thelper.Profile_id))
             );
         }
 
         [Fact]
         public void TestKO_nopIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
-                () => client.profile.stage.set(thelper.Source_id,
-                 stage: RequestConstant.Stage.LATER,
-                 filter_id: thelper.Filter_id)
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
+(Func<object>)(() => client.profile.stage.set(thelper.Source_id,
+                 stage: (string)global::riminder.RequestConstant.Stage.LATER,
+                 filter_id: thelper.Filter_id))
             );
         }
 
         [Fact]
         public void TestKO_badsource()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
-                () =>client.profile.stage.set("not a good sdzdzddzdzddzdd source.",
-                stage: RequestConstant.Stage.LATER,
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
+(Func<object>)(() => client.profile.stage.set("not a good sdzdzddzdzddzdd source.",
+                stage: (string)global::riminder.RequestConstant.Stage.LATER,
                 profile_id: thelper.Profile_id,
-                filter_id: thelper.Filter_id)
+                filter_id: thelper.Filter_id))
             );
         }
 
         [Fact]
         public void TestKO_badpid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
-               () => client.profile.stage.set(thelper.Source_id,
-               stage: RequestConstant.Stage.LATER,
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
+(Func<object>)(() => client.profile.stage.set(thelper.Source_id,
+               stage: (string)global::riminder.RequestConstant.Stage.LATER,
                profile_id: "Not a good profile id.dddsdzdzddzd",
-               filter_id: thelper.Filter_id)
+               filter_id: thelper.Filter_id))
            );
         }
 
         [Fact]
         public void TestKO_badfid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
-               () => client.profile.stage.set(thelper.Source_id,
-               stage: RequestConstant.Stage.LATER,
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
+(Func<object>)(() => client.profile.stage.set(thelper.Source_id,
+               stage: (string)global::riminder.RequestConstant.Stage.LATER,
                profile_id: thelper.Profile_id,
-               filter_id: "Not a good filter id.dzdzdzdzdzdd")
+               filter_id: "Not a good filter id.dzdzdzdzdzdd"))
            );
         }
 
         [Fact]
         public void TestKO_badref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
-                () => client.profile.stage.set(thelper.Source_id,
-                stage: RequestConstant.Stage.LATER,
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
+(Func<object>)(() => client.profile.stage.set(thelper.Source_id,
+                stage: (string)global::riminder.RequestConstant.Stage.LATER,
                 profile_reference: "I'm not a good profile reddzdzddzdf",
-                filter_reference: thelper.Filter_reference)
+                filter_reference: thelper.Filter_reference))
             );
         }
 
         [Fact]
         public void TestKO_badfref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
-                () => client.profile.stage.set(thelper.Source_id,
-                stage: RequestConstant.Stage.LATER,
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
+(Func<object>)(() => client.profile.stage.set(thelper.Source_id,
+                stage: (string)global::riminder.RequestConstant.Stage.LATER,
                 profile_reference: thelper.Profile_reference,
-                filter_reference: "I'm not a good fildzdzdzddzdter ref")
+                filter_reference: "I'm not a good fildzdzdzddzdter ref"))
             );
         }
 
@@ -438,7 +438,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_nofIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
                 () => client.profile.rating.set(thelper.Source_id,
                  rating: 1,
                  profile_id: thelper.Profile_id)
@@ -448,7 +448,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_nopIDref()
         {
-            Assert.Throws<riminder.exp.RiminderArgumentException>(
+            Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
                 () => client.profile.rating.set(thelper.Source_id,
                  rating: 1,
                  filter_id: thelper.Filter_id)
@@ -458,7 +458,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badsource()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.rating.set("not a good sdzdzddzdzddzdd source.",
                 rating: 1,
                 profile_id: thelper.Profile_id,
@@ -469,7 +469,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badpid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                () => client.profile.rating.set(thelper.Source_id,
                rating: 1,
                profile_id: "Not a good profile id.dddsdzdzddzd",
@@ -480,7 +480,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badfid()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                () => client.profile.rating.set(thelper.Source_id,
                rating: 1,
                profile_id: thelper.Profile_id,
@@ -491,7 +491,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.rating.set(thelper.Source_id,
                 rating: 1,
                 profile_reference: "I'm not a good profile reddzdzddzdf",
@@ -502,7 +502,7 @@ namespace riminder.UnitTests.route
         [Fact]
         public void TestKO_badfref()
         {
-            Assert.Throws<riminder.exp.RiminderResponseException>(
+            Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                 () => client.profile.rating.set(thelper.Source_id,
                 rating: 1,
                 profile_reference: thelper.Profile_reference,

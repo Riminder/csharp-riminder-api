@@ -1,6 +1,6 @@
 using System;
 
-namespace riminder.exp
+namespace Riminder.exp
 {
     [System.Serializable]
     public class RiminderWebhookSignatureException : RiminderException

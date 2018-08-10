@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
 
-namespace riminder.exp
+namespace Riminder.exp
 {
     [System.Serializable]
     public class RiminderResponseException : RiminderException

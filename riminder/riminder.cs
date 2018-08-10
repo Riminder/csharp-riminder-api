@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RestSharp;
 
 
-namespace riminder
+namespace Riminder
 {
     public class Riminder
     {
@@ -21,10 +21,10 @@ namespace riminder
         private Dictionary<string,string> _headers;
         private RestClientW _client;
 
-        public riminder.route.Source source {get;}
-        public riminder.route.Filter filter {get;}
-        public riminder.route.Profile profile {get;}
-        public riminder.route.Webhook webhooks {get;}
+        public global::Riminder.route.Source source {get;}
+        public global::Riminder.route.Filter filter {get;}
+        public global::Riminder.route.Profile profile {get;}
+        public global::Riminder.route.Webhook webhooks {get;}
 
         private static string setstringWthDefault(string value, string dft)
         {
@@ -48,10 +48,10 @@ namespace riminder
             _headers["X-API-KEY"] = _secret_key;
             _client = new RestClientW(_url, _headers);
 
-            source = new riminder.route.Source( _client);
-            filter = new riminder.route.Filter(_client);
-            profile = new riminder.route.Profile( _client);
-            webhooks = new riminder.route.Webhook( _client, _webhook_key);
+            source = new global::Riminder.route.Source(_client);
+            filter = new global::Riminder.route.Filter(_client);
+            profile = new global::Riminder.route.Profile(_client);
+            webhooks = new global::Riminder.route.Webhook(_client, _webhook_key);
         }
     }
 }

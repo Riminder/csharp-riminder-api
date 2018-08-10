@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace riminder.UnitTests.route
+namespace Riminder.UnitTests.route
 {
     public class Filter_Test
     {
@@ -18,7 +18,7 @@ namespace riminder.UnitTests.route
                 client = thelper.Client;
             }
 
-            private void check_filter_elem(riminder.response.FilterListElem elem)
+            private void check_filter_elem(global::Riminder.response.FilterListElem elem)
             {
                 Assert.True(elem.filter_id != null);
                 Assert.True(elem.filter_reference != null);
@@ -53,7 +53,7 @@ namespace riminder.UnitTests.route
             public void TestKO_id()
             {
 
-                Assert.Throws<riminder.exp.RiminderResponseException>(
+                Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                     () => client.filter.get(filter_id: "hahahahahahah"));
             }
 
@@ -67,7 +67,7 @@ namespace riminder.UnitTests.route
             public void TestKO_reference()
             {
 
-                Assert.Throws<riminder.exp.RiminderResponseException>(
+                Assert.Throws<global::Riminder.exp.RiminderResponseException>(
                     () => client.filter.get(filter_reference: "hope it will never be a valid refence :/"));
             }
         }

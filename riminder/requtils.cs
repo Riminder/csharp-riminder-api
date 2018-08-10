@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("riminder.Tests")]
-namespace riminder
+namespace Riminder
 {
     class RequestUtils
     {
@@ -34,7 +34,7 @@ namespace riminder
         public static void assert_id_ref_notNull(string id, string reff, string message="")
         {
             if (is_empty(id) && is_empty(reff))
-                throw new riminder.exp.RiminderArgumentException(message);
+                throw new global::Riminder.exp.RiminderArgumentException(message);
         }
 
         public static string Base64Decode(string input)

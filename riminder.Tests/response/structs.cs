@@ -1,9 +1,9 @@
 using Xunit;
 using System;
-using riminder.response;
+using Riminder.response;
 using Newtonsoft.Json;
 
-namespace riminder.UnitTests.response
+namespace Riminder.UnitTests.response
 {
     public class TrainingMetadata_Test
     {
@@ -17,7 +17,7 @@ namespace riminder.UnitTests.response
         private void resetMetadata()
         {
             _metadata.filter_reference = "reference0";
-            _metadata.stage = riminder.RequestConstant.Stage.NEW;
+            _metadata.stage = global::Riminder.RequestConstant.Stage.NEW;
             _metadata.stage_timestamp = 1533805327;
             _metadata.rating = 1;
             _metadata.rating_timestamp = 1533805327;

@@ -3,9 +3,9 @@ using System;
 
 using Newtonsoft.Json;
 
-using riminder;
+using Riminder;
 
-namespace riminder.UnitTests
+namespace Riminder.UnitTests
 {
     public class TestHelper
     {
@@ -14,9 +14,9 @@ namespace riminder.UnitTests
 
         private static List<string> _stage_list = new List<string>
         {
-            {riminder.RequestConstant.Stage.LATER},
-            {riminder.RequestConstant.Stage.NEW},
-            {riminder.RequestConstant.Stage.NO},
+            {global::Riminder.RequestConstant.Stage.LATER},
+            {global::Riminder.RequestConstant.Stage.NEW},
+            {global::Riminder.RequestConstant.Stage.NO},
             {null},
             {null}
         };
@@ -91,7 +91,7 @@ namespace riminder.UnitTests
                     if (source_tmp.source_id != null)
                         _source_id = source_tmp.source_id;
                     else
-                        throw new riminder.exp.RiminderArgumentException(String.Format("Source {0} not found", _source_name));
+                        throw new global::Riminder.exp.RiminderArgumentException(string.Format("Source {0} not found", _source_name));
                 }
                 else
                     _source_id = sources[0].source_id;
@@ -104,7 +104,7 @@ namespace riminder.UnitTests
             var filters = _client.filter.list();
             var filter = filters.Find(x => x.filter_id != null && x.filter_reference != null);
             if (filter.filter_id == null)
-                throw new riminder.exp.RiminderArgumentException(String.Format("No valid filter found."));
+                throw new global::Riminder.exp.RiminderArgumentException(string.Format("No valid filter found."));
             
             _filter_id = filter.filter_id;
             _filter_reference = filter.filter_reference;
@@ -138,7 +138,7 @@ namespace riminder.UnitTests
             var profiles = _client.profile.list(source_ids);
             var profile = profiles.profiles.Find(x => x.profile_id != null && x.profile_reference != null);
             if (profile.profile_id == null)
-                 throw new riminder.exp.RiminderArgumentException(String.Format("No valid profile found."));
+                 throw new global::Riminder.exp.RiminderArgumentException(string.Format("No valid profile found."));
             _profile_id = profile.profile_id;
             _profile_reference = profile.profile_reference;
         }
@@ -165,7 +165,7 @@ namespace riminder.UnitTests
             }
         }
 
-        public static bool check_date(riminder.response.Date date)
+        public static bool check_date(global::Riminder.response.Date date)
         {
             if (date.date == null && date.timezone == null)
             {
@@ -174,11 +174,11 @@ namespace riminder.UnitTests
             return date.date != null && date.timezone != null;
         }
 
-        public riminder.response.TrainingMetadatas gen_metadatas()
+        public global::Riminder.response.TrainingMetadatas gen_metadatas()
         {
             var rnd = new Random();
-            var res = new riminder.response.TrainingMetadatas();
-            var elem = new riminder.response.TrainingMetadata();
+            var res = new global::Riminder.response.TrainingMetadatas();
+            var elem = new global::Riminder.response.TrainingMetadata();
             elem.filter_reference = this.Filter_reference;
             elem.stage = _stage_list[rnd.Next(0, _stage_list.Count)];
             elem.rating = rnd.Next(1, 5);
@@ -190,44 +190,44 @@ namespace riminder.UnitTests
             return res;
         }
 
-        public static riminder.response.ProfileJson gen_profileJson()
+        public static global::Riminder.response.ProfileJson gen_profileJson()
         {
-            var profileJson = new riminder.response.ProfileJson()
+            var profileJson = new global::Riminder.response.ProfileJson()
             {
                 name = "Salvor Hardin",
                 email = "sssalvorrr.54haaardiiin@gmail.com",
                 phone = "0678524695",
                 summary = "Former mayor of Terminus I resolve one of the first Sheldon Crisis.",
-                location_details = new riminder.response.ProfileJson.LocationDetails()
+                location_details = new global::Riminder.response.ProfileJson.LocationDetails()
                 {
                     text = "Terminus, Terminus"
                 },
-                experiences = new List<riminder.response.ProfileJson.Experience>()
+                experiences = new List<global::Riminder.response.ProfileJson.Experience>()
                 {
-                    {new riminder.response.ProfileJson.Experience
+                    {new global::Riminder.response.ProfileJson.Experience
                     {
                         start = "21/1/45",
                         end = "12/12/55",
                         title = "Mayor",
                         company = "Fondation",
                         location = null,
-                        location_details = new riminder.response.ProfileJson.LocationDetails()
+                        location_details = new global::Riminder.response.ProfileJson.LocationDetails()
                         {
                             text = "Terminus, Terminus"
                         },
                         description = "Save the Fondation."
                     }}
                 },
-                educations = new List<riminder.response.ProfileJson.Education>()
+                educations = new List<global::Riminder.response.ProfileJson.Education>()
                 {
-                    {new riminder.response.ProfileJson.Education
+                    {new global::Riminder.response.ProfileJson.Education
                     {
                         start = "21/1/30",
                         end = "12/12/40",
                         title = "something",
                         school = "Fondation hard school",
                         location = null,
-                        location_details = new riminder.response.ProfileJson.LocationDetails()
+                        location_details = new global::Riminder.response.ProfileJson.LocationDetails()
                         {
                             text = "Terminus, Terminus"
                         },
@@ -246,7 +246,7 @@ namespace riminder.UnitTests
                 {
                     "cigar", "Fondation"
                 },
-                urls = new riminder.response.ProfileJson.Urls()
+                urls = new global::Riminder.response.ProfileJson.Urls()
                 {
                     from_resume = new List<string>(),
                     linkedin = null,
@@ -258,11 +258,11 @@ namespace riminder.UnitTests
 
         public Dictionary<string, string> gen_encodedHeaders()
         {
-            var payload = new riminder.response.WebhookProfileParse()
+            var payload = new global::Riminder.response.WebhookProfileParse()
             {
-                type = riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
+                type = global::Riminder.route.Webhook.EventNames.PROFILE_PARSE_SUCCESS,
                 message = "Yey it's parsed ! :) (not actually a true message)",
-                profile = new riminder.response.WebhookProfile()
+                profile = new global::Riminder.response.WebhookProfile()
                 {
                     profile_id = "some complicated id",
                     profile_reference = "some simple reference"

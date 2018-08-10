@@ -6,7 +6,7 @@ using RestSharp;
 using Newtonsoft.Json;
 
 
-namespace riminder
+namespace Riminder
 {
     using RequestQueryArgs = Dictionary<string, string>;
     using RequestBodyParams = Dictionary<string, object>;
@@ -101,7 +101,7 @@ namespace riminder
         private static void check_response(IRestResponse resp)
         {
             if (!resp.IsSuccessful)
-                throw new riminder.exp.RiminderResponseException(resp);
+                throw new global::Riminder.exp.RiminderResponseException(resp);
         }
 
         public RestClientW(Uri base_uri, Dictionary<string, string> def_headers)

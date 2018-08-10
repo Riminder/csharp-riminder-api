@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace riminder.UnitTests.route
+namespace Riminder.UnitTests.route
 {
     public class Source_Test
     {
@@ -18,7 +18,7 @@ namespace riminder.UnitTests.route
                 client = thelper.Client;
             }
 
-            private void check_source_elem(riminder.response.SourceListElem elem)
+            private void check_source_elem(global::Riminder.response.SourceListElem elem)
             {
                 Assert.True(elem.source_id != null);
                 Assert.True(TestHelper.check_date(elem.date_creation));

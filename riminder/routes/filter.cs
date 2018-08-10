@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace riminder.route
+namespace Riminder.route
 {
     public class Filter
     {
@@ -15,7 +15,7 @@ namespace riminder.route
 
         public response.FilterList list()
         {
-            var resp = _client.get<riminder.response.FilterList>("filters");
+            var resp = _client.get<global::Riminder.response.FilterList>("filters");
             return resp.data;
         }
 
@@ -23,13 +23,13 @@ namespace riminder.route
         { 
             // To avoid a line of about 30000 column.
             var mess = String.Format("One beetween filter_id and filter_reference has to be not null or empty. (filter_id: {0} filter_reference: {1})", filter_id, filter_reference);
-            riminder.RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
+            global::Riminder.RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
             
             var query = new Dictionary<string, string>();
-            riminder.RequestUtils.addIfNotNull(ref query, "filter_id", filter_id);
-            riminder.RequestUtils.addIfNotNull(ref query, "filter_reference", filter_reference);
+            global::Riminder.RequestUtils.addIfNotNull(ref query, "filter_id", filter_id);
+            global::Riminder.RequestUtils.addIfNotNull(ref query, "filter_reference", filter_reference);
             
-            var resp = _client.get<riminder.response.Filter_get>("filter", query);
+            var resp = _client.get<global::Riminder.response.Filter_get>("filter", query);
             return resp.data;
         }
     }
