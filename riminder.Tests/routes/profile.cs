@@ -156,21 +156,21 @@ namespace Riminder.UnitTests.route
         public void TestKO_noIDref()
         {
             Assert.Throws<global::Riminder.exp.RiminderArgumentException>(
-                () => client.profile.documents.list(thelper.Source_id)
+                () => client.profile.document.list(thelper.Source_id)
             );
         }
 
         [Fact]
         public void TestOK()
         {
-            client.profile.documents.list(thelper.Source_id, thelper.Profile_id);
+            client.profile.document.list(thelper.Source_id, thelper.Profile_id);
         }
 
         [Fact]
         public void TestKO_badsource()
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
-                () => client.profile.documents.list("zap", thelper.Profile_id)
+                () => client.profile.document.list("zap", thelper.Profile_id)
             );
         }
 
@@ -178,7 +178,7 @@ namespace Riminder.UnitTests.route
         public void TestKO_badid()
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
-                () => client.profile.documents.list(thelper.Source_id, "lol")
+                () => client.profile.document.list(thelper.Source_id, "lol")
             );
         }
 
@@ -186,14 +186,14 @@ namespace Riminder.UnitTests.route
         public void TestKO_badref()
         {
             Assert.Throws<global::Riminder.exp.RiminderResponseException>(
-                () => client.profile.documents.list(thelper.Source_id, profile_reference: "lol")
+                () => client.profile.document.list(thelper.Source_id, profile_reference: "lol")
             );
         }
 
         [Fact]
         public void TestOK_ref()
         {
-            client.profile.documents.list(thelper.Source_id, profile_reference: thelper.Profile_reference);
+            client.profile.document.list(thelper.Source_id, profile_reference: thelper.Profile_reference);
         }
     }
 
