@@ -11,6 +11,8 @@ namespace Riminder
     using RequestQueryArgs = Dictionary<string, string>;
     using RequestBodyParams = Dictionary<string, object>;
 
+    // This class purpose is to abstract the request management and
+    // propose a simpler interface for it.
     class RestClientW
     {
         private RestSharp.RestClient client {get;}
@@ -86,14 +88,12 @@ namespace Riminder
             response = prepare_response(response);
             try
             {
-                // respObj = SimpleJson.SimpleJson.DeserializeObject<response.BaseResponse<T>>(response);
                 respObj = JsonConvert.DeserializeObject<response.BaseResponse<T>>(response);
             }
             catch (JsonException e)
             {
                 var debugmess = String.Format("Connot parse api's response. {0}", response);
                 throw new exp.RiminderResponseParsingException(debugmess, e);
-                // throw new exp.RiminderResponseParsingException("Cannot parse api's response.", e);
             }
             return respObj;
         }
@@ -110,6 +110,10 @@ namespace Riminder
             fill_default_header(def_headers);
         }
 
+        // These method a name before their http methods and will prepare send and hanlder a request life
+        // cycle using RestSharp.
+        // Since Api response always have the same layout they return a BaseResponse object.
+        
         public response.BaseResponse<T> get<T>(string endpoint, RequestQueryArgs args = null)
         {
             var req = new RestRequest(endpoint, Method.GET);

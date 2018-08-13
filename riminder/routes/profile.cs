@@ -10,6 +10,8 @@ namespace Riminder.route
         private RestClientW _client;
         private const long _start_timestamp = 1407423743;
 
+        // Sub classes to match Riminder naming norm for
+        // api sdks.
         public Structured json;
         public Documents document;
         public Parsing parsing;
@@ -41,7 +43,7 @@ namespace Riminder.route
             {
                 {"source_id", source_id}
             };
-            // timestamp as a long can not be null
+            // timestamp as a long can not be null (-1 => null)
             if (timestamp_reception != -1)
                 body.Add("timestamp_reception", timestamp_reception);
             RequestUtils.addIfNotNull(ref body, "profile_reference", profile_reference);
@@ -247,6 +249,7 @@ namespace Riminder.route
             }
         }
 
+        // Structured is section is call under /profile/json
         public class Structured
         {
             private RestClientW _client;

@@ -143,7 +143,7 @@ Riminder.response.ProfileJsonCheck resp = client.json.check(profile_data, traini
     * `profile_data` (`Riminder.response.ProfileJson`) is the parsed profile you want to add, can be called "profile_json".
     * `training_metadata` type is (`Riminder.response.TrainingMetadatas`)
 ```c#
-Riminder.response.ProfileJson_post resp = client.json.add(source_id, profile_reference, timestamp_reception, profile_data, training_metadata);
+Riminder.response.ProfileJson_post resp = client.json.add(source_id, profile_data, profile_reference, timestamp_reception, training_metadata);
 ```
 
 More details about profiles are available [here](https://developers.Riminder.net/v1.0/reference#profile)
