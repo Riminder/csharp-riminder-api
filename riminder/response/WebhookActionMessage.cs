@@ -13,7 +13,7 @@ namespace Riminder.response
         public string message;
         public WebhookProfile profile;
         public WebhookFilter filter;
-        string stage;
+        public string stage;
     }
 
     public class WebhookActionRating : IWebhookMessage
@@ -26,6 +26,6 @@ namespace Riminder.response
         public string message;
         public WebhookProfile profile;
         public WebhookFilter filter;
-        int rating;
+        public int rating;
     }
 }

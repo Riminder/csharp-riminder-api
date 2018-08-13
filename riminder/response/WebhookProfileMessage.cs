@@ -24,6 +24,6 @@ namespace Riminder.response
         public string message;
         public WebhookProfile profile;
         public WebhookFilter filter;
-        float score;
+        public float score;
     }
 }

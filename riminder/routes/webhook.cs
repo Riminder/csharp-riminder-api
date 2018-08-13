@@ -11,13 +11,6 @@ namespace Riminder.route
         public delegate void WebhookHandler(string eventName, response.IWebhookMessage webhook_data);
         public delegate response.IWebhookMessage WebhookMessageParser(JToken token);
 
-        // public delegate void WebhookProfileParseHandler(string eventName, response.WebhookProfileParse webhook_data);
-        // public delegate void WebhookProfileScoreHandler(string eventName, response.WebhookProfileScore webhook_data);
-        // public delegate void WebhookFilterTrainHandler(string eventName, response.WebhookFilterTrain webhook_data);
-        // public delegate void WebhookFilterScoreHandler(string eventName, response.WebhookFilterScore webhook_data);
-        // public delegate void WebhookActionRatingHandler(string eventName, response.WebhookActionRating webhook_data);
-        // public delegate void WebhookActionStageHandler(string eventName, response.WebhookActionStage webhook_data);
-
         private RestClientW _client;
         private string _key;
         private Dictionary<string, WebhookHandler> _handlers;

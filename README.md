@@ -6,7 +6,7 @@ A c# api client for riminder api.
 
 ## Instalation with nuget
 ```shell
-$somthing riminder
+dotnet add package riminder
 ```
 
 ## Authentification
