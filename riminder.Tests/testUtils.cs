@@ -37,7 +37,7 @@ namespace Riminder.UnitTests
         TestHelper()
         {
             _webhook_key = "som reallllllllly good key";
-            _secret_key = "ask_4b7fa33174a7113fbd16d806dbd21c07";
+            _secret_key = "";
             _source_name = "sdk_test";
             _cv_path = "./assets/cv_test00.jpg";
             _cv_dir = "./assets/for_batch"; 
