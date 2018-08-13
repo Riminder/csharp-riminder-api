@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>riminder</id>
-    <version>0.0.3-alpha</version>
+    <version>1.0.0</version>
     <title>Riminder c# api client.</title>
     <authors>riminder</authors>
     <owners>$author$</owners>
