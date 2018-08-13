@@ -107,7 +107,7 @@ Riminder.response.Profile_get resp = client.profile.get(source_id, profile_id, p
 
 * Get attachements of a specific profile.
 ```c#
-Riminder.response.ProfileDocument_list resp = client.profile.documents.list(source_id, profile_id, profile_reference);
+Riminder.response.ProfileDocument_list resp = client.profile.document.list(source_id, profile_id, profile_reference);
 ```
 
 * Get parsing result of a specific profile.

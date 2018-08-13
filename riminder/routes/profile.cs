@@ -11,7 +11,7 @@ namespace Riminder.route
         private const long _start_timestamp = 1407423743;
 
         public Structured json;
-        public Documents documents;
+        public Documents document;
         public Parsing parsing;
         public Scoring scoring;
         public Stage stage;
@@ -22,7 +22,7 @@ namespace Riminder.route
             _client = (RestClientW)client;
 
             json = new Structured(_client);
-            documents = new Documents(_client);
+            document = new Documents(_client);
             parsing = new Parsing(_client);
             scoring = new Scoring(_client);
             stage = new Stage(_client);
