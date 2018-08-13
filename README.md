@@ -50,7 +50,7 @@ For example `client.filter.get()` can take a
 
 and work as well.
 
-All methods return structures which attribute are public and match json keys. And only the `data` field will be returned.
+All methods return structures which attribute are public and match json keys. Only the `data` field will be returned.
 For example: `{"code": 200, "message: "All green.", "data": {"name": "Natalie"}}` would become
 ```c#
 public class ExampleStruct: IResponse
@@ -73,7 +73,7 @@ Riminder.response.FilterList resp = client.filter.list();
 Riminder.response.Filter_get resp = client.filter.get(filter_id, filter_reference);
 ```
 
-More details about filters api is available [here](https://developers.Riminder.net/v1.0/reference#jobs)
+More details about filters are available [here](https://developers.Riminder.net/v1.0/reference#jobs)
 
 ### Profile
 
@@ -144,7 +144,9 @@ Riminder.response.ProfileJsonCheck resp = client.json.check(profile_data, traini
 Riminder.response.ProfileJson_post resp = client.json.add(source_id, profile_reference, timestamp_reception, profile_data, training_metadata);
 ```
 
-### Souces
+More details about profiles are available [here](https://developers.Riminder.net/v1.0/reference#profile)
+
+### Sources
 
 * Get all source from the team.
 ```c#
@@ -155,6 +157,8 @@ Riminder.response.SourceList resp = client.source.list();
 ```c#
 Riminder.response.Source_get resp = client.source.get(source_id);
 ```
+
+More details about profiles are available [here](https://developers.Riminder.net/v1.0/reference#source)
 
 ### Webhooks
 
@@ -201,19 +205,21 @@ public class Example
         var client = new Riminder("apikey");
 
         // Define an handler
-        var handler = delegate (string eventName, response.IWebhookMessage) { /* something */}
+        var handler = delegate (string eventName, response.IWebhookMessage webhook_data) { /* something */};
 
         // Set the handler for an event
         client.webhooks.setHandler(Webhook.EventNames.PROFILE_PARSE_SUCCESS, handler);
 
         // Get the header of the request by webhook
-        var rcvheaders = fct_that_get_the_request_from_webhook();
+        var rcvheaders = fct_that_get_webhook_request();
 
         // Handle an event
         client.webhooks.handle(headers: rcvheaders);
     }
 }
 ```
+
+More details about webhooks are available [here](https://developers.Riminder.net/v1.0/reference#authentication-1)
 
 ## Tests
 
