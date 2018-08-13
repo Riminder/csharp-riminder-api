@@ -7,7 +7,7 @@ namespace Riminder.route
     {
         private RestClientW _client;
 
-        // To avoid incoherente type availabilitie
+        // To avoid incoherente type availability
         public Filter(object client)
         {
             _client = (RestClientW)client;

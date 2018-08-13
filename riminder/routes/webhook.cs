@@ -8,12 +8,19 @@ namespace Riminder.route
     public class Webhook
     {
         private const string HEADER_SIGNATURE_KEY = "HTTP-RIMINDER-SIGNATURE";
+
+        // Hanlder for webhooks events
         public delegate void WebhookHandler(string eventName, response.IWebhookMessage webhook_data);
+
+        // To be able to store response parser and avoid a big switch
         public delegate response.IWebhookMessage WebhookMessageParser(JToken token);
 
         private RestClientW _client;
         private string _key;
         private Dictionary<string, WebhookHandler> _handlers;
+        
+        // _typeobj contains function to pass from a JToken to the 
+        // good struct for the event. 
         private Dictionary<string, WebhookMessageParser> _typeobj;
 
         public class EventNames
@@ -107,11 +114,13 @@ namespace Riminder.route
         {
             if (headers != null && headers.ContainsKey(HEADER_SIGNATURE_KEY))
                 return headers[HEADER_SIGNATURE_KEY];
+
             if (signatureHeader != null)
                 return signatureHeader;
             throw new exp.RiminderArgumentException("A signature header must be given.");
         }
 
+        // Perform strstr operations.
         private static string customstrstr(string input, string to_change, string to)
         {
             var res = "";
@@ -143,7 +152,7 @@ namespace Riminder.route
 
             var expectedsign_byte = hasher.ComputeHash(byte_payload);
             var expectedsign = System.Text.Encoding.UTF8.GetString(expectedsign_byte);
-            // throw new exp.RiminderWebhookSignatureException(String.Format("{0} - {1}", expectedsign, sign), "...");
+
             return expectedsign.Equals(sign) ? true : false;
         }
 
@@ -151,6 +160,7 @@ namespace Riminder.route
         {
             var data = JObject.Parse(json_data);
             var type = data["type"].Value<string>();
+            
             if (!_typeobj.ContainsKey(type))
                 throw new exp.RiminderResponseParsingException(String.Format("{0} is not a valid event.", type));
             return _typeobj[type](data);
