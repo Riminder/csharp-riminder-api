@@ -251,15 +251,15 @@ namespace Riminder.route
             }
         }
 
-        public class Interpretability
+        public class Reveal
         {
             private RestClientW _client;
-            public Interpretability(object client)
+            public Reveal(object client)
             {
                 _client = (RestClientW)client;
             }
 
-            public response.ProfileInterpretability get(string source_id,
+            public response.ProfileReveal get(string source_id,
                 string profile_id = null, string profile_reference = null,
                 string filter_id = null, string filter_reference = null)
             {
@@ -278,7 +278,7 @@ namespace Riminder.route
                 RequestUtils.addIfNotNull(ref bodyParams, "filter_id", filter_id);
                 RequestUtils.addIfNotNull(ref bodyParams, "filter_reference", filter_reference);
 
-                var resp = _client.get<response.ProfileInterpretability>("profile/interpretability", args: query);
+                var resp = _client.get<response.ProfileReveal>("profile/interpretability", args: query);
                 return resp.data;
             }
         }

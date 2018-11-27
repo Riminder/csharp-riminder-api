@@ -81,7 +81,7 @@ namespace Riminder.response
         public string score;
     }
 
-    public class InterpretabilityProfile
+    public class RevealProfile
     {
         public List<Experience> experiences;
         public List<Education> educations;
@@ -109,7 +109,7 @@ namespace Riminder.response
         }
     }
 
-    public class InterpretabilitySkills
+    public class RevealSkills
     {
         public List<WordScore> hardSkills;
         public List<WordScore> specialSkills;
