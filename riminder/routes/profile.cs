@@ -18,7 +18,7 @@ namespace Riminder.route
         public Scoring scoring;
         public Stage stage;
         public Rating rating;
-        public Interpretability interpretability;
+        public Reveal reveal;
 
         public Profile(object client)
         {
@@ -30,12 +30,12 @@ namespace Riminder.route
             scoring = new Scoring(_client);
             stage = new Stage(_client);
             rating = new Rating(_client);
-            interpretability = new Interpretability(_client);
+            reveal = new Reveal(_client);
         }
 
-        public response.Profile_post add(string source_id, 
-            string file_path, string profile_reference = null, 
-            long timestamp_reception = -1, 
+        public response.Profile_post add(string source_id,
+            string file_path, string profile_reference = null,
+            long timestamp_reception = -1,
             response.TrainingMetadatas training_metadatas = null)
         {
             if (training_metadatas != null)
@@ -55,9 +55,9 @@ namespace Riminder.route
             return resp.data;
         }
 
-        public response.ProfileList list(List<string> source_ids, 
-            long date_start = _start_timestamp, 
-            long date_end = -1, 
+        public response.ProfileList list(List<string> source_ids,
+            long date_start = _start_timestamp,
+            long date_end = -1,
             int page = 1,
             int limit = 30,
             string seniority = RequestConstant.Seniority.ALL,
@@ -95,7 +95,7 @@ namespace Riminder.route
             // To avoid a line of about 30000 column.
             var mess = String.Format("One beetween profile_id and profile_reference has to be not null or empty. (profile_id: {0} profile_reference: {1})", profile_id, profile_reference);
             RequestUtils.assert_id_ref_notNull(profile_id, profile_reference, mess);
-            
+
             var query = new Dictionary<string, string>
             {
                 {"source_id", source_id}
@@ -194,7 +194,7 @@ namespace Riminder.route
             }
 
             public response.ProfileStage set(string source_id, string stage,
-                string profile_id = null, string profile_reference = null, 
+                string profile_id = null, string profile_reference = null,
                 string filter_id = null, string filter_reference = null)
             {
                 // To avoid a line of about 30000 column.
@@ -269,14 +269,14 @@ namespace Riminder.route
                 mess = String.Format("One beetween filter_id and filter_reference has to be not null or empty. (filter_id: {0} filter_reference: {1})", filter_id, filter_reference);
                 RequestUtils.assert_id_ref_notNull(filter_id, filter_reference, mess);
 
-                var query = new Dictionary<string, object>
+                var query = new Dictionary<string, string>
                 {
                     {"source_id", source_id}
                 };
-                RequestUtils.addIfNotNull(ref bodyParams, "profile_id", profile_id);
-                RequestUtils.addIfNotNull(ref bodyParams, "profile_reference", profile_reference);
-                RequestUtils.addIfNotNull(ref bodyParams, "filter_id", filter_id);
-                RequestUtils.addIfNotNull(ref bodyParams, "filter_reference", filter_reference);
+                RequestUtils.addIfNotNull(ref query, "profile_id", profile_id);
+                RequestUtils.addIfNotNull(ref query, "profile_reference", profile_reference);
+                RequestUtils.addIfNotNull(ref query, "filter_id", filter_id);
+                RequestUtils.addIfNotNull(ref query, "filter_reference", filter_reference);
 
                 var resp = _client.get<response.ProfileReveal>("profile/interpretability", args: query);
                 return resp.data;
@@ -304,7 +304,7 @@ namespace Riminder.route
                 return resp.data;
             }
 
-            public response.ProfileJson_post add(string source_id, response.ProfileJson profile_data, 
+            public response.ProfileJson_post add(string source_id, response.ProfileJson profile_data,
                 string profile_reference = null, long timestamp_reception = -1,
                 response.TrainingMetadatas training_metadata = null)
                 {
