@@ -122,7 +122,7 @@ Riminder.response.ProfileScoringList resp = client.profile.scoring.list(source_i
 
 * Reveal interpretability result of a specific profile with a specific filter.
 ```c#
-Riminder.response.ProfileReveal resp = client.profile.reveal.get(source_id: source_id, profile_id: profile_id, profile_reference: profile_reference, filter_id: filter_id, filter_reference: filter_reference);
+Riminder.response.ProfileRevealing resp = client.profile.revealing.get(source_id: source_id, profile_id: profile_id, profile_reference: profile_reference, filter_id: filter_id, filter_reference: filter_reference);
 ```
 
 * Set stage of a specific profile for a specified filter.

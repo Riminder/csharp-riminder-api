@@ -18,7 +18,7 @@ namespace Riminder.route
         public Scoring scoring;
         public Stage stage;
         public Rating rating;
-        public Reveal reveal;
+        public Revealing revealing;
 
         public Profile(object client)
         {
@@ -30,7 +30,7 @@ namespace Riminder.route
             scoring = new Scoring(_client);
             stage = new Stage(_client);
             rating = new Rating(_client);
-            reveal = new Reveal(_client);
+            revealing = new Revealing(_client);
         }
 
         public response.Profile_post add(string source_id,
@@ -251,15 +251,15 @@ namespace Riminder.route
             }
         }
 
-        public class Reveal
+        public class Revealing
         {
             private RestClientW _client;
-            public Reveal(object client)
+            public Revealing(object client)
             {
                 _client = (RestClientW)client;
             }
 
-            public response.ProfileReveal get(string source_id,
+            public response.ProfileRevealing get(string source_id,
                 string profile_id = null, string profile_reference = null,
                 string filter_id = null, string filter_reference = null)
             {
@@ -278,7 +278,7 @@ namespace Riminder.route
                 RequestUtils.addIfNotNull(ref query, "filter_id", filter_id);
                 RequestUtils.addIfNotNull(ref query, "filter_reference", filter_reference);
 
-                var resp = _client.get<response.ProfileReveal>("profile/interpretability", args: query);
+                var resp = _client.get<response.ProfileRevealing>("profile/revealing", args: query);
                 return resp.data;
             }
         }
