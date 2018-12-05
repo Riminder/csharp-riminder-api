@@ -10,7 +10,7 @@ dotnet add package riminder
 ```
 
 ## Authentification
-To authenticate against the api, get your API SECRET KEY from your riminder dashboard: 
+To authenticate against the api, get your API SECRET KEY from your riminder dashboard:
 ![findApiSecret](./secretLocation.png)
 
 Then create a new `Riminder.Riminder` object with this key:
@@ -45,10 +45,10 @@ If an error occurs while an operation an exception inherited from `Riminder.exp.
 ## Api
 The mentionned team is the team linked to your secret key.
 
-When both `*_id` and `*_reference` arguments are requested only one is requiered. 
+When both `*_id` and `*_reference` arguments are requested only one is required.
 For example `client.filter.get()` can take a
 * `filter_id` (`client.filter.get(filter_id: var_filter_id)`)  
-* `filter_reference` (`client.filter.get(filter_reference: var_filter_reference`) 
+* `filter_reference` (`client.filter.get(filter_reference: var_filter_reference`)
 
 and work as well.
 
@@ -80,20 +80,20 @@ More details about filters are available [here](https://developers.Riminder.net/
 ### Profile
 
 * Retrieve the profiles information associated with specified source ids.
-    * `source_ids` (`List<string>`) is *requiered*.
+    * `source_ids` (`List<string>`) is *required*.
     * `date_start` and `date_end` type are `long`.
     * `page`,  `rating` and `limit` type are `int`.
 ```c#
 Riminder.response.ProfileList resp = client.profile.list(source_ids,
- date_start, date_end, 
- page, limit , seniority, 
- filter_id, filter_reference, 
- stage, rating, 
+ date_start, date_end,
+ page, limit , seniority,
+ filter_id, filter_reference,
+ stage, rating,
  sort_by, order_by);
 ```
 
 * Add a new profile to a source on the platform.
-    * `source_id` and `file_path` are *requiered*
+    * `source_id` and `file_path` are *required*
     * `file_path` is the path to the file to be uploaded.
     * `training_metadatas` type is `response.TrainingMetadatas` (`response/struct.cs`)
 ```c#
@@ -120,14 +120,19 @@ Riminder.response.ProfileParsing resp = client.profile.parsing.get(source_id, pr
 Riminder.response.ProfileScoringList resp = client.profile.scoring.list(source_id, profile_id, profile_reference);
 ```
 
-* Set stage of a specific profile for a spcified filter.
-    * `stage` is requiered.
+* Reveal interpretability result of a specific profile with a specific filter.
+```c#
+Riminder.response.ProfileRevealing resp = client.profile.revealing.get(source_id: source_id, profile_id: profile_id, profile_reference: profile_reference, filter_id: filter_id, filter_reference: filter_reference);
+```
+
+* Set stage of a specific profile for a specified filter.
+    * `stage` is required.
 ```c#
 Riminder.response.ProfileStage resp = client.profile.stage.set(source_id, stage, profile_id, profile_reference, filter_id, filter_reference);
 ```
 
 * Set rating of a specific profile for a spcified filter.
-    * `rating` (`int`) is requiered.
+    * `rating` (`int`) is required.
 ```c#
 Riminder.response.ProfileRating resp = client.profile.stage.set(source_id, rating, profile_id, profile_reference, filter_id, filter_reference);
 ```
@@ -171,8 +176,8 @@ Webhooks methods permit you handle webhook events.
 Riminder.response.WebhookCheck resp = client.webhooks.check();
 ```
 * Set an handler for a specified webhook event.
-    * `handler` (`Riminder.route.Webhook.WebhookHandler`) is a delegate of signature: `void WebhookHandler(string eventName, response.IWebhookMessage webhook_data)` 
-        * data received by the webhook are store in `webhook_data`. 
+    * `handler` (`Riminder.route.Webhook.WebhookHandler`) is a delegate of signature: `void WebhookHandler(string eventName, response.IWebhookMessage webhook_data)`
+        * data received by the webhook are store in `webhook_data`.
         * `webhook_data` struct follow the same rules as the responses.
         * `eventName` is `type` field of the webhook.
 
@@ -190,11 +195,11 @@ client.webhooks.removeHandler(eventName);
 * Start the selected handler depending of the event given.
     * `headers` is webhook request headers.
     * `signatureHeader` is webhook request "HTTP-RIMINDER-SIGNATURE" header value.
-        * One them is requiered not both.
+        * One them is required not both.
 ```c#
 client.webhooks.handle(headers, signatureHeader)
 ```
-Example: 
+Example:
 ```c#
 using System;
 using Riminder;
@@ -233,4 +238,4 @@ Some tests are available. To run them follow these steps:
 ## Help and documentation
 If you need some more details about the api methods and routes see [Riminder API Docs](https://developers.Riminder.net/v1.0/reference).
 
-If you need further explainations about how the api works see [Riminder API Overview](https://developers.riminder.net/v1.0/docs/website-api-overview) 
+If you need further explainations about how the api works see [Riminder API Overview](https://developers.riminder.net/v1.0/docs/website-api-overview)

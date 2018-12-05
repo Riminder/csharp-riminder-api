@@ -18,7 +18,7 @@ namespace Riminder.response
         public List<string> interests;
         public Urls urls;
 
-        // Diferent from profile parsing one.
+        // Different from profile parsing one.
         public class Experience
         {
             public string start;
@@ -30,6 +30,7 @@ namespace Riminder.response
             public string description;
         }
 
+        // Different from interpretability one.
         public class Education
         {
             public string start;
@@ -71,6 +72,49 @@ namespace Riminder.response
     public class ScoringTemplate
     {
         public string name;
+    }
+
+    // Used in InterpretabilityProfile class.
+    public class WordScore
+    {
+        public string word;
+        public string score;
+    }
+
+    public class RevealingProfile
+    {
+        public List<Experience> experiences;
+        public List<Education> educations;
+
+        // Different from the other ones.
+        public class Experience
+        {
+            public int startDate;
+            public int endDate;
+            public string score;
+            public List<WordScore> title;
+            public List<WordScore> description;
+            public List<WordScore> company;
+        }
+
+        // Different from profile json one.
+        public class Education
+        {
+            public int startDate;
+            public int endDate;
+            public string score;
+            public List<WordScore> title;
+            public List<WordScore> description;
+            public List<WordScore> school;
+        }
+    }
+
+    public class RevealingSkills
+    {
+        public List<WordScore> hardSkills;
+        public List<WordScore> specialSkills;
+        public List<WordScore> transversalSkills;
+        public List<WordScore> softSkills;
     }
 
     // It can be part of request sometimes.
